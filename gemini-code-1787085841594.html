@@ -1,0 +1,458 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SetupChat | Tu Agencia de Ventas e Inteligencia Artificial</title>
+    <style>
+        :root {
+            --accent: #6366f1;
+            --dark: #0f172a;
+            --light: #f8fafc;
+            --white: #ffffff;
+            --whatsapp: #25d366;
+            --gray: #64748b;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', system-ui, -apple-system, sans-serif;
+        }
+
+        body {
+            background-color: var(--light);
+            color: var(--dark);
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* Navbar */
+        nav {
+            padding: 20px 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo-container {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 800;
+            color: var(--dark);
+            letter-spacing: -1px;
+        }
+
+        .logo span {
+            color: var(--accent);
+        }
+        
+        .btn-whatsapp {
+            background: var(--whatsapp);
+            color: white;
+            padding: 10px 20px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.9rem;
+            transition: background 0.3s;
+        }
+
+        .btn-whatsapp:hover {
+            background: #22bf5b;
+        }
+
+        /* Hero */
+        .hero {
+            padding: 70px 0 60px 0;
+            text-align: center;
+        }
+
+        .badge {
+            background: #e0e7ff;
+            color: var(--accent);
+            padding: 8px 18px;
+            border-radius: 50px;
+            font-weight: 700;
+            font-size: 0.9rem;
+            margin-bottom: 25px;
+            display: inline-block;
+            box-shadow: 0 4px 10px rgba(99, 102, 241, 0.1);
+        }
+
+        .hero h1 {
+            font-size: 3.2rem;
+            line-height: 1.15;
+            margin-bottom: 20px;
+            letter-spacing: -1px;
+            color: var(--dark);
+        }
+
+        .hero h1 span {
+            color: var(--accent);
+        }
+
+        .hero p {
+            font-size: 1.15rem;
+            color: var(--gray);
+            max-width: 650px;
+            margin: 0 auto;
+            font-weight: 400;
+        }
+        
+        /* Pricing */
+        .pricing-section {
+            padding: 40px 0 60px 0;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.2rem;
+            margin-bottom: 40px;
+            font-weight: 800;
+        }
+
+        .pricing-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(310px, 1fr));
+            gap: 30px;
+            align-items: stretch;
+        }
+
+        .plan {
+            background: var(--white);
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 10px 15px -3px rgba(0,0,0,0.05);
+            border: 2px solid #e2e8f0;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            transition: transform 0.3s, border-color 0.3s;
+        }
+
+        .plan:hover {
+            border-color: var(--accent);
+            transform: translateY(-5px);
+        }
+
+        .plan.featured {
+            border-color: var(--accent);
+            box-shadow: 0 20px 25px -5px rgba(99, 102, 241, 0.15);
+            position: relative;
+        }
+
+        .plan.featured::before {
+            content: "Más Popular";
+            position: absolute;
+            top: -12px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--accent);
+            color: white;
+            font-size: 0.75rem;
+            font-weight: 700;
+            padding: 4px 12px;
+            border-radius: 20px;
+            text-transform: uppercase;
+        }
+
+        .plan h3 {
+            font-size: 1.5rem;
+            margin-bottom: 8px;
+        }
+
+        .plan p.desc {
+            color: var(--gray);
+            font-size: 0.95rem;
+            margin-bottom: 20px;
+        }
+
+        .promo-box {
+            background: #f0fdf4;
+            color: #166534;
+            padding: 8px 12px;
+            border-radius: 8px;
+            font-size: 0.85rem;
+            font-weight: 700;
+            margin-bottom: 15px;
+            border: 1px solid #bbf7d0;
+        }
+
+        .price {
+            font-size: 2.3rem;
+            font-weight: 800;
+            margin: 10px 0 25px 0;
+            color: var(--dark);
+        }
+
+        .price span {
+            font-size: 0.95rem;
+            font-weight: 500;
+            color: var(--gray);
+        }
+
+        .plan ul {
+            list-style: none;
+            margin-bottom: 30px;
+            flex-grow: 1;
+        }
+
+        .plan ul li {
+            margin-bottom: 12px;
+            color: var(--gray);
+            font-size: 0.95rem;
+            display: flex;
+            align-items: center;
+        }
+
+        .plan ul li::before {
+            content: "✓";
+            color: var(--accent);
+            font-weight: bold;
+            margin-right: 10px;
+        }
+
+        .btn {
+            display: block;
+            text-align: center;
+            padding: 14px 20px;
+            background: var(--dark);
+            color: white;
+            border-radius: 12px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: background 0.2s;
+        }
+
+        .btn:hover {
+            background: #1e293b;
+        }
+
+        .plan.featured .btn {
+            background: var(--accent);
+        }
+
+        .plan.featured .btn:hover {
+            background: #4f46e5;
+        }
+
+        /* FAQ Section */
+        .faq-section {
+            padding: 60px 0 80px 0;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .faq-item {
+            background: var(--white);
+            padding: 25px;
+            border-radius: 12px;
+            margin-bottom: 20px;
+            border: 1px solid #e2e8f0;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.02);
+        }
+
+        .faq-item h4 {
+            font-size: 1.1rem;
+            margin-bottom: 10px;
+            color: var(--dark);
+        }
+
+        .faq-item p {
+            color: var(--gray);
+            font-size: 0.95rem;
+        }
+
+        /* Widget Flotante de Chat */
+        .chat-widget-btn {
+            position: fixed;
+            bottom: 25px;
+            right: 25px;
+            background: var(--dark);
+            color: white;
+            padding: 12px 20px;
+            border-radius: 50px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+            cursor: pointer;
+            z-index: 1000;
+            border: 2px solid var(--accent);
+            transition: transform 0.2s;
+        }
+
+        .chat-widget-btn:hover {
+            transform: scale(1.05);
+        }
+
+        .chat-avatar {
+            width: 32px;
+            height: 32px;
+            background: var(--accent);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 0.85rem;
+            color: white;
+            position: relative;
+        }
+
+        .online-dot {
+            width: 10px;
+            height: 10px;
+            background: var(--whatsapp);
+            border: 2px solid var(--dark);
+            border-radius: 50%;
+            position: absolute;
+            bottom: 0;
+            right: 0;
+        }
+
+        footer {
+            text-align: center;
+            padding: 40px 0;
+            color: var(--gray);
+            font-size: 0.9rem;
+            border-top: 1px solid #e2e8f0;
+        }
+
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 2.4rem; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <nav>
+            <div class="logo-container">
+                <!-- Logotipo minimalista con icono y signo + -->
+                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M21 11.5C21 16.7467 16.7467 21 11.5 21C9.93257 21 8.45265 20.6214 7.15175 19.9531L3 21L4.04689 16.8483C3.37861 15.5474 3 14.0674 3 12.5C3 7.25329 7.25329 3 12.5 3C17.7467 3 22 7.25329 22 12.5" stroke="#6366f1" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M8 12H16" stroke="#0f172a" stroke-width="2" stroke-linecap="round"/>
+                    <path d="M12 8V16" stroke="#0f172a" stroke-width="2" stroke-linecap="round"/>
+                </svg>
+                <div class="logo">SETUP<span>CHAT</span></div>
+            </div>
+            <a href="https://wa.me/" class="btn-whatsapp" target="_blank">Escríbenos</a>
+        </nav>
+
+        <section class="hero">
+            <div class="badge">⚡ El Futuro de la IA es Hoy</div>
+            <h1>Transformamos tu WhatsApp en una <br><span>máquina de ventas 24/7</span></h1>
+            <p>Cada mensaje sin responder a tiempo es dinero perdido. Nosotros instalamos, configuramos y operamos todo por ti.</p>
+        </section>
+
+        <section class="pricing-section">
+            <h2 class="section-title">Planes Transparentes</h2>
+            <div class="pricing-grid">
+                
+                <!-- Plan 1: Esencial -->
+                <div class="plan">
+                    <div>
+                        <h3>Esencial</h3>
+                        <p class="desc">Ideal para empezar rápido.</p>
+                        <div class="promo-box">🎁 Setup Inicial + 1° Mes GRATIS</div>
+                        <div class="price">$175.000 <span>/mes</span></div>
+                        <ul>
+                            <li>Setup inicial llave en mano (GRATIS)</li>
+                            <li>IA WhatsApp (hasta 500 chats)</li>
+                            <li>Catálogo básico integrado</li>
+                            <li>Soporte técnico 24/7</li>
+                        </ul>
+                    </div>
+                    <a href="https://wa.me/" class="btn" target="_blank">Elegir Esencial</a>
+                </div>
+
+                <!-- Plan 2: Profesional (Destacado) -->
+                <div class="plan featured">
+                    <div>
+                        <h3>Profesional</h3>
+                        <p class="desc">IA avanzada + Gestión de Pauta.</p>
+                        <div class="promo-box">🎁 Setup Inicial + 1° Mes GRATIS</div>
+                        <div class="price">$230.000 <span>/mes</span></div>
+                        <ul>
+                            <li>Setup inicial llave en mano (GRATIS)</li>
+                            <li>IA con acceso a base de datos</li>
+                            <li>Gestión de Ads (Meta)</li>
+                            <li>Reportes de ventas mensuales</li>
+                        </ul>
+                    </div>
+                    <a href="https://wa.me/" class="btn" target="_blank">Elegir Profesional</a>
+                </div>
+
+                <!-- Plan 3: Enterprise -->
+                <div class="plan">
+                    <div>
+                        <h3>Enterprise</h3>
+                        <p class="desc">Integración total para empresas.</p>
+                        <div class="promo-box">🎁 Setup Inicial + 1° Mes GRATIS</div>
+                        <div class="price">$290.000 <span>/mes</span></div>
+                        <ul>
+                            <li>Setup inicial llave en mano (GRATIS)</li>
+                            <li>IA con entrenamiento profundo</li>
+                            <li>CRM Integrado</li>
+                            <li>Conexión API avanzada</li>
+                            <li>Soporte VIP prioritario</li>
+                        </ul>
+                    </div>
+                    <a href="https://wa.me/" class="btn" target="_blank">Elegir Enterprise</a>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- Sección de Preguntas Frecuentes (FAQ) -->
+        <section class="faq-section">
+            <h2 class="section-title">Preguntas Frecuentes</h2>
+            
+            <div class="faq-item">
+                <h4>¿Cómo funciona la promoción del Setup y el primer mes gratis?</h4>
+                <p>Al elegir cualquiera de nuestros planes, el costo de configuración inicial y la primera mensualidad de operación de la inteligencia artificial van por nuestra cuenta. Comienzas a pagar tu suscripción mensual recién a partir del segundo mes de uso.</p>
+            </div>
+
+            <div class="faq-item">
+                <h4>¿Qué significa "hasta 500 chats" en el plan Esencial?</h4>
+                <p>Se refiere a hasta 500 usuarios o clientes únicos interactuando con tu asistente de inteligencia artificial durante el mes. Si un mismo cliente te escribe varias veces para consultar distintas cosas, cuenta como una sola conversación activa, optimizando al máximo tu cupo.</p>
+            </div>
+
+            <div class="faq-item">
+                <h4>¿Tengo que saber de programación o configurar algo técnico?</h4>
+                <p>Absolutamente no. Nuestro servicio es 100% "llave en mano". Nosotros nos encargamos de todo el montaje en tu WhatsApp Business, diseño de catálogos y entrenamiento de la inteligencia artificial. Tú solo te encargas de vender.</p>
+            </div>
+
+            <div class="faq-item">
+                <h4>¿Qué pasa si mi negocio supera los chats mensuales contratados?</h4>
+                <p>Significa que el sistema te está trayendo excelentes resultados y mayor volumen de clientes. En ese momento, te ayudamos a escalar de forma sencilla al siguiente plan para seguir operando sin interrupciones.</p>
+            </div>
+        </section>
+
+        <footer>
+            <p>&copy; 2026 SetupChat. Todos los derechos reservados.</p>
+        </footer>
+    </div>
+
+    <!-- Widget Flotante del Asistente IA -->
+    <div class="chat-widget-btn" onclick="alert('¡Hola! Aquí se abriría la ventana de chat con la IA de SetupChat.')">
+        <div class="chat-avatar">
+            AI
+            <div class="online-dot"></div>
+        </div>
+        <span style="font-weight: 600; font-size: 0.9rem;">Asistente IA</span>
+    </div>
+</body>
+</html>
