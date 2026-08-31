@@ -1,0 +1,706 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SetupChat | Tu Agencia de Ventas e Inteligencia Artificial</title>
+    <style>
+        :root {
+            --accent: #6366f1;
+            --dark: #0f172a;
+            --light: #f8fafc;
+            --white: #ffffff;
+            --whatsapp: #25d366;
+            --gray: #64748b;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', system-ui, -apple-system, sans-serif;
+        }
+
+        body {
+            background-color: var(--light);
+            color: var(--dark);
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* Navbar */
+        nav {
+            padding: 20px 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo-container {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 800;
+            color: var(--dark);
+            letter-spacing: -1px;
+        }
+
+        .logo span {
+            color: var(--accent);
+        }
+        
+        .btn-whatsapp {
+            background: var(--whatsapp);
+            color: white;
+            padding: 10px 20px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.9rem;
+            transition: background 0.3s;
+        }
+
+        .btn-whatsapp:hover {
+            background: #22bf5b;
+        }
+
+        /* Hero */
+        .hero {
+            padding: 70px 0 40px 0;
+            text-align: center;
+        }
+
+        .badge {
+            background: #e0e7ff;
+            color: var(--accent);
+            padding: 8px 18px;
+            border-radius: 50px;
+            font-weight: 700;
+            font-size: 0.9rem;
+            margin-bottom: 25px;
+            display: inline-block;
+            box-shadow: 0 4px 10px rgba(99, 102, 241, 0.1);
+        }
+
+        .hero h1 {
+            font-size: 3.2rem;
+            line-height: 1.15;
+            margin-bottom: 20px;
+            letter-spacing: -1px;
+            color: var(--dark);
+        }
+
+        .hero h1 span {
+            color: var(--accent);
+        }
+
+        .hero p {
+            font-size: 1.15rem;
+            color: var(--gray);
+            max-width: 650px;
+            margin: 0 auto;
+            font-weight: 400;
+        }
+
+        /* Secciones de Demostración (Zig-Zag) */
+        .darwin-demo-section {
+            padding: 40px 0 60px 0;
+        }
+
+        .darwin-container {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 50px;
+            flex-wrap: wrap;
+        }
+
+        .darwin-container.reverse {
+            flex-direction: row-reverse;
+        }
+
+        .phone-column {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            min-width: 280px;
+        }
+
+        .phone-mockup-frame {
+            width: 290px;
+            height: 580px;
+            border-radius: 36px;
+            border: 10px solid #0f172a;
+            overflow: hidden;
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.15);
+            background: #000;
+        }
+
+        .phone-mockup-frame video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .text-column {
+            flex: 1;
+            min-width: 300px;
+            text-align: left;
+        }
+
+        .text-column h2 {
+            font-size: 2.3rem;
+            line-height: 1.2;
+            margin-bottom: 20px;
+            letter-spacing: -1px;
+            color: var(--dark);
+        }
+
+        .text-column h2 span {
+            color: var(--accent);
+        }
+
+        .text-column p {
+            font-size: 1.1rem;
+            color: var(--gray);
+            margin-bottom: 30px;
+            font-weight: 400;
+        }
+        
+        /* Pricing */
+        .pricing-section {
+            padding: 40px 0 60px 0;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.2rem;
+            margin-bottom: 40px;
+            font-weight: 800;
+        }
+
+        .pricing-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(310px, 1fr));
+            gap: 30px;
+            align-items: stretch;
+        }
+
+        .plan {
+            background: var(--white);
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 10px 15px -3px rgba(0,0,0,0.05);
+            border: 2px solid #e2e8f0;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            transition: transform 0.3s, border-color 0.3s;
+        }
+
+        .plan:hover {
+            border-color: var(--accent);
+            transform: translateY(-5px);
+        }
+
+        .plan.featured {
+            border-color: var(--accent);
+            box-shadow: 0 20px 25px -5px rgba(99, 102, 241, 0.15);
+            position: relative;
+        }
+
+        .plan.featured::before {
+            content: "Más Popular";
+            position: absolute;
+            top: -12px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--accent);
+            color: white;
+            font-size: 0.75rem;
+            font-weight: 700;
+            padding: 4px 12px;
+            border-radius: 20px;
+            text-transform: uppercase;
+        }
+
+        .plan h3 {
+            font-size: 1.5rem;
+            margin-bottom: 8px;
+        }
+
+        .plan p.desc {
+            color: var(--gray);
+            font-size: 0.95rem;
+            margin-bottom: 20px;
+        }
+
+        .promo-box {
+            background: #f0fdf4;
+            color: #166534;
+            padding: 8px 12px;
+            border-radius: 8px;
+            font-size: 0.85rem;
+            font-weight: 700;
+            margin-bottom: 15px;
+            border: 1px solid #bbf7d0;
+        }
+
+        .price {
+            font-size: 2.3rem;
+            font-weight: 800;
+            margin: 10px 0 25px 0;
+            color: var(--dark);
+        }
+
+        .price span {
+            font-size: 0.95rem;
+            font-weight: 500;
+            color: var(--gray);
+        }
+
+        .plan ul {
+            list-style: none;
+            margin-bottom: 30px;
+            flex-grow: 1;
+        }
+
+        .plan ul li {
+            margin-bottom: 12px;
+            color: var(--gray);
+            font-size: 0.95rem;
+            display: flex;
+            align-items: center;
+        }
+
+        .plan ul li::before {
+            content: "✓";
+            color: var(--accent);
+            font-weight: bold;
+            margin-right: 10px;
+        }
+
+        .btn {
+            display: block;
+            text-align: center;
+            padding: 14px 20px;
+            background: var(--dark);
+            color: white;
+            border-radius: 12px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: background 0.2s;
+        }
+
+        .btn:hover {
+            background: #1e293b;
+        }
+
+        .plan.featured .btn {
+            background: var(--accent);
+        }
+
+        .plan.featured .btn:hover {
+            background: #4f46e5;
+        }
+
+        /* Sección de Preguntas Frecuentes (Estilo Darwin) */
+        .faq-darwin-section {
+            padding: 60px 0 80px 0;
+        }
+
+        .faq-darwin-container {
+            display: flex;
+            align-items: flex-start;
+            justify-content: space-between;
+            gap: 60px;
+            flex-wrap: wrap;
+        }
+
+        .faq-left-info {
+            flex: 1;
+            min-width: 300px;
+        }
+
+        .faq-badge {
+            background: #e0e7ff;
+            color: var(--accent);
+            padding: 6px 16px;
+            border-radius: 50px;
+            font-weight: 700;
+            font-size: 0.85rem;
+            margin-bottom: 20px;
+            display: inline-block;
+            text-transform: uppercase;
+        }
+
+        .faq-left-info h2 {
+            font-size: 2.5rem;
+            font-weight: 900;
+            line-height: 1.15;
+            margin-bottom: 20px;
+            color: var(--dark);
+            letter-spacing: -1px;
+        }
+
+        .faq-left-info h2 span {
+            color: var(--accent);
+        }
+
+        .faq-left-info p {
+            font-size: 1.05rem;
+            color: var(--gray);
+            line-height: 1.6;
+            margin-bottom: 30px;
+        }
+
+        .faq-right-list {
+            flex: 1.2;
+            min-width: 320px;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .faq-card {
+            background: var(--white);
+            border-radius: 16px;
+            border: 1px solid #e2e8f0;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.01);
+            overflow: hidden;
+            transition: border-color 0.2s;
+        }
+
+        .faq-card:hover {
+            border-color: #cbd5e1;
+        }
+
+        .faq-question {
+            width: 100%;
+            background: none;
+            border: none;
+            padding: 22px 25px;
+            text-align: left;
+            font-size: 1.05rem;
+            font-weight: 700;
+            color: var(--dark);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            cursor: pointer;
+        }
+
+        .faq-icon {
+            font-size: 1.3rem;
+            font-weight: 400;
+            color: var(--gray);
+            transition: transform 0.3s ease;
+        }
+
+        .faq-answer {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease, padding 0.3s ease;
+            padding: 0 25px;
+            color: var(--gray);
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+
+        .faq-card.active .faq-answer {
+            max-height: 200px;
+            padding: 0 25px 22px 25px;
+        }
+
+        .faq-card.active .faq-icon {
+            transform: rotate(45deg);
+            color: var(--accent);
+        }
+
+        /* Widget Flotante */
+        @keyframes super-pulse {
+            0% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.7); transform: scale(1); }
+            50% { box-shadow: 0 0 0 20px rgba(37, 211, 102, 0); transform: scale(1.03); }
+            100% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0); transform: scale(1); }
+        }
+
+        .chat-widget-container {
+            position: fixed;
+            bottom: 25px;
+            right: 25px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            z-index: 1000;
+            cursor: pointer;
+        }
+
+        .chat-bubble {
+            background: white;
+            padding: 12px 16px;
+            border-radius: 16px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: var(--dark);
+            border: 1px solid #e2e8f0;
+            position: relative;
+            animation: bounce-bubble 3s infinite ease-in-out;
+        }
+
+        @keyframes bounce-bubble {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-5px); }
+        }
+
+        .chat-widget-btn {
+            background: var(--whatsapp);
+            color: white;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 10px 25px rgba(37, 211, 102, 0.4);
+            animation: super-pulse 2s infinite;
+            transition: transform 0.2s;
+        }
+
+        .chat-widget-btn:hover {
+            transform: scale(1.1);
+        }
+
+        footer {
+            text-align: center;
+            padding: 40px 0;
+            color: var(--gray);
+            font-size: 0.9rem;
+            border-top: 1px solid #e2e8f0;
+        }
+
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 2.4rem; }
+            .text-column h2 { font-size: 2rem; }
+            .darwin-container, .darwin-container.reverse {
+                flex-direction: column;
+                justify-content: center;
+                text-align: center;
+            }
+            .text-column {
+                text-align: center;
+            }
+            .faq-left-info h2 {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <nav>
+            <div class="logo-container">
+                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M21 11.5C21 16.7467 16.7467 21 11.5 21C9.93257 21 8.45265 20.6214 7.15175 19.9531L3 21L4.04689 16.8483C3.37861 15.5474 3 14.0674 3 12.5C3 7.25329 7.25329 3 12.5 3C17.7467 3 22 7.25329 22 12.5" stroke="#6366f1" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M8 12H16" stroke="#0f172a" stroke-width="2" stroke-linecap="round"/>
+                    <path d="M12 8V16" stroke="#0f172a" stroke-width="2" stroke-linecap="round"/>
+                </svg>
+                <div class="logo">SETUP<span>CHAT</span></div>
+            </div>
+            <a href="https://wa.me/56942757701?text=Quiero%20contratar%20Inteligencia%20Artificial%20para%20mi%20negocio" class="btn-whatsapp" target="_blank">Escríbenos</a>
+        </nav>
+
+        <section class="hero">
+            <div class="badge">⚡ El Futuro de la IA es Hoy</div>
+            <h1>Transformamos tu WhatsApp en una <br><span>máquina de ventas 24/7</span></h1>
+            <p>Cada mensaje sin responder a tiempo es dinero perdido. Nosotros instalamos, configuramos y operamos todo por ti.</p>
+        </section>
+
+        <!-- SECCIÓN DE DEMOSTRACIÓN 1 -->
+        <section class="darwin-demo-section">
+            <div class="darwin-container">
+                <div class="phone-column">
+                    <div class="phone-mockup-frame">
+                        <video src="video-1.mp4" autoplay loop muted playsinline></video>
+                    </div>
+                </div>
+                <div class="text-column">
+                    <h2>Atiende a tus clientes en cualquier momento, <span>sin esfuerzo.</span></h2>
+                    <p>Olvídate de tiempos de espera: tu equipo podrá enfocarse en lo importante mientras SetupChat vende por ti, gestiona las preguntas, muestra tu catálogo y cierra ventas.</p>
+                    <a href="https://wa.me/56942757701?text=Quiero%20probar%20la%20IA%20de%20SetupChat" class="btn-whatsapp" style="display: inline-block; border-radius: 12px; padding: 14px 28px; font-size: 1rem;">Prueba SetupChat →</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECCIÓN DE DEMOSTRACIÓN 2 (Zig-Zag) -->
+        <section class="darwin-demo-section" style="background-color: #f1f5f9; border-radius: 24px; padding: 50px 30px; margin-bottom: 40px;">
+            <div class="darwin-container reverse">
+                <div class="phone-column">
+                    <div class="phone-mockup-frame">
+                        <video src="video-2.mp4" autoplay loop muted playsinline></video>
+                    </div>
+                </div>
+                <div class="text-column">
+                    <h2>Todos tus canales de venta, <span>automatizados y unificados</span></h2>
+                    <p>Simplifica la gestión de tus canales de venta y garantiza respuestas rápidas, consistentes y siempre disponibles para que ningún cliente se quede sin comprar.</p>
+                    <a href="https://wa.me/56942757701?text=Quiero%20automatizar%20mis%20canales%20de%20venta" class="btn-whatsapp" style="display: inline-block; border-radius: 12px; padding: 14px 28px; font-size: 1rem;">Prueba SetupChat →</a>
+                </div>
+            </div>
+        </section>
+
+        <section class="pricing-section">
+            <h2 class="section-title">Planes Transparentes</h2>
+            <div class="pricing-grid">
+                
+                <div class="plan">
+                    <div>
+                        <h3>Esencial</h3>
+                        <p class="desc">Ideal para empezar rápido.</p>
+                        <div class="promo-box">🎁 Setup Inicial + 1° Mes GRATIS</div>
+                        <div class="price">$175.000 <span>/mes</span></div>
+                        <ul>
+                            <li>Setup inicial llave en mano (GRATIS)</li>
+                            <li>IA WhatsApp (hasta 500 chats)</li>
+                            <li>Catálogo básico integrado</li>
+                            <li>Soporte técnico 24/7</li>
+                        </ul>
+                    </div>
+                    <a href="https://wa.me/56942757701?text=Quiero%20contratar%20el%20Plan%20Esencial" class="btn" target="_blank">Elegir Esencial</a>
+                </div>
+
+                <div class="plan featured">
+                    <div>
+                        <h3>Profesional</h3>
+                        <p class="desc">IA avanzada + Gestión de Pauta.</p>
+                        <div class="promo-box">🎁 Setup Inicial + 1° Mes GRATIS</div>
+                        <div class="price">$230.000 <span>/mes</span></div>
+                        <ul>
+                            <li>Setup inicial llave en mano (GRATIS)</li>
+                            <li>IA con acceso a base de datos</li>
+                            <li>Gestión de Ads (Meta)</li>
+                            <li>Reportes de ventas mensuales</li>
+                        </ul>
+                    </div>
+                    <a href="https://wa.me/56942757701?text=Quiero%20contratar%20el%20Plan%20Profesional" class="btn" target="_blank">Elegir Profesional</a>
+                </div>
+
+                <div class="plan">
+                    <div>
+                        <h3>Enterprise</h3>
+                        <p class="desc">Integración total para empresas.</p>
+                        <div class="promo-box">🎁 Setup Inicial + 1° Mes GRATIS</div>
+                        <div class="price">$290.000 <span>/mes</span></div>
+                        <ul>
+                            <li>Setup inicial llave en mano (GRATIS)</li>
+                            <li>IA con entrenamiento profundo</li>
+                            <li>CRM Integrado</li>
+                            <li>Conexión API avanzada</li>
+                            <li>Soporte VIP prioritario</li>
+                        </ul>
+                    </div>
+                    <a href="https://wa.me/56942757701?text=Quiero%20contratar%20el%20Plan%20Enterprise" class="btn" target="_blank">Elegir Enterprise</a>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- PREGUNTAS FRECUENTES -->
+        <section class="faq-darwin-section">
+            <div class="faq-darwin-container">
+                
+                <div class="faq-left-info">
+                    <div class="faq-badge">FAQs</div>
+                    <h2>Todo lo que Necesitas Saber sobre <span>SetupChat</span></h2>
+                    <p>Descubre cómo nuestra inteligencia artificial puede transformar tus operaciones, automatizando procesos clave y mejorando la eficiencia de tu negocio con respuestas precisas y personalizadas.</p>
+                    <a href="https://wa.me/56942757701?text=Quiero%20saber%20mas%20sobre%20SetupChat" class="btn-whatsapp" style="display: inline-block; border-radius: 12px; padding: 14px 28px; font-size: 1rem;">Prueba SetupChat →</a>
+                </div>
+
+                <div class="faq-right-list">
+                    
+                    <div class="faq-card">
+                        <button class="faq-question">
+                            ¿Cómo funciona la promoción del Setup y el primer mes gratis?
+                            <span class="faq-icon">+</span>
+                        </button>
+                        <div class="faq-answer">
+                            Al elegir cualquiera de nuestros planes, el costo de configuración inicial y la primera mensualidad de operación van por nuestra cuenta. Comienzas a pagar tu suscripción mensual recién a partir del segundo mes de uso.
+                        </div>
+                    </div>
+
+                    <div class="faq-card">
+                        <button class="faq-question">
+                            ¿Qué significa "hasta 500 chats" en el plan Esencial?
+                            <span class="faq-icon">+</span>
+                        </button>
+                        <div class="faq-answer">
+                            Se refiere a hasta 500 usuarios o clientes únicos interactuando con tu asistente de inteligencia artificial durante el mes. Si un mismo cliente te escribe varias veces, cuenta como una sola conversación activa.
+                        </div>
+                    </div>
+
+                    <div class="faq-card">
+                        <button class="faq-question">
+                            ¿Tengo que saber de programación o configurar algo técnico?
+                            <span class="faq-icon">+</span>
+                        </button>
+                        <div class="faq-answer">
+                            Absolutamente no. Nuestro servicio es 100% "llave en mano". Nosotros nos encargamos de todo el montaje en tu WhatsApp Business, diseño de catálogos y entrenamiento de la inteligencia artificial.
+                        </div>
+                    </div>
+
+                    <div class="faq-card">
+                        <button class="faq-question">
+                            ¿Qué pasa si mi negocio supera los chats mensuales contratados?
+                            <span class="faq-icon">+</span>
+                        </button>
+                        <div class="faq-answer">
+                            Significa que el sistema te está trayendo excelentes resultados. En ese momento, te ayudamos a escalar de forma sencilla al siguiente plan para seguir operando sin interrupciones.
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+        </section>
+
+        <footer>
+            <p>&copy; 2026 SetupChat. Todos los derechos reservados.</p>
+        </footer>
+    </div>
+
+    <!-- Widget Flotante -->
+    <div class="chat-widget-container" onclick="window.open('https://wa.me/56942757701?text=Quiero%20contratar%20Inteligencia%20Artificial%20para%20mi%20negocio', '_blank')">
+        <div class="chat-bubble">
+            💬 ¿Quieres probar la IA ahora mismo?
+        </div>
+        <div class="chat-widget-btn">
+            <svg width="32" height="32" viewBox="0 0 24 24" fill="white">
+                <path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074--2.972-1.49-4.925-2.678-6.891-6.075-.125-.216-.013-.333.109-.447.111-.107.248-.272.372-.408.125-.137.166-.232.248-.387.082-.155.041-.297-.02-.418-.062-.122-.57-1.382-.782-1.893-.206-.505-.415-.437-.57-.445-.148-.008-.318-.008-.488-.008-.17 0-.447.062-.682.315-.235.253-.902.882-.902 2.152 0 1.27 1.253 2.5 1.427 2.706.173.456 2.459 3.753 5.954 5.263.832.359 1.481.574 1.988.735.836.265 1.596.227 2.194.138.67-.1 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414z"/>
+            </svg>
+        </div>
+    </div>
+
+    <!-- Script para el acordeón de Preguntas Frecuentes -->
+    <script>
+        document.querySelectorAll('.faq-question').forEach(button => {
+            button.addEventListener('click', () => {
+                const card = button.parentElement;
+                document.querySelectorAll('.faq-card').forEach(item => {
+                    if (item !== card) {
+                        item.classList.remove('active');
+                    }
+                });
+                card.classList.toggle('active');
+            });
+        });
+    </script>
+</body>
+</html>
