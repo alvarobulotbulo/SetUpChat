@@ -269,8 +269,8 @@
         }
         .animated-path {
             fill: none;
-            stroke: #0066cc; /* Azul más llamativo */
-            stroke-width: 3.5; /* Línea más gruesa y vistosa */
+            stroke: #0066cc;
+            stroke-width: 3.5;
             stroke-dasharray: 8 6;
             opacity: 0.65;
         }
@@ -614,18 +614,14 @@
             border-top: 1px solid var(--border-color);
         }
 
-        /* MEDIA QUERIES PARA ADAPTARSE A CELULARES DE FORMA LIMPIA Y VISIBLE */
         @media (max-width: 900px) {
             .hero-tech-bg { display: none; }
             .hero { text-align: center; margin: 3rem auto 2rem auto; }
             .hero-content { max-width: 100%; }
             .hero h1 { font-size: 2.4rem; }
-            
-            /* Diagrama Omnicanal adaptado a móvil: compacto pero manteniendo el círculo central brillante */
             .channels-flow-section { padding: 2.5rem 1rem; margin: 2rem 1rem; }
-            .flow-container { flex-direction: column; gap: 20px; }
-            .flow-lines { display: none; } /* En pantallas muy estrechas ocultamos las líneas SVG cruzadas para evitar cortes y priorizamos el núcleo flotante */
-            
+            .flow-container { flex-direction: column; gap: 30px; }
+            .flow-lines { display: none; }
             .feature-section { 
                 grid-template-columns: 1fr; 
                 gap: 2.5rem; 
@@ -655,7 +651,7 @@
     </header>
 
     <section class="hero">
-        <!-- Esfera Tecnológica Animada de Fondo -->
+        <!-- Esfera Tecnológica Animada de Fondo (Recuperada) -->
         <div class="hero-tech-bg">
             <canvas id="techSphere"></canvas>
         </div>
@@ -707,7 +703,7 @@
                 <div class="channel-badge">💙 Facebook Messenger</div>
             </div>
 
-            <!-- Núcleo de IA Central (Garantizado visible en PC y Móvil) -->
+            <!-- Núcleo de IA Central -->
             <div class="ai-core-node">
                 SetupChat
                 <span>Motor de IA 24/7</span>
@@ -985,4 +981,20 @@
                     if (dist < 40) {
                         let scale2 = 300 / (300 + z2);
                         let px2 = x2 * scale2 + cx;
-                        let py2 = y2
+                        let py2 = y2 * scale2 + cy;
+
+                        ctx.strokeStyle = `rgba(0, 102, 204, ${0.08 * (1 - dist / 40)})`;
+                        ctx.lineWidth = 0.75;
+                        ctx.beginPath();
+                        ctx.moveTo(px, py);
+                        ctx.lineTo(px2, py2);
+                        ctx.stroke();
+                    }
+                }
+            }
+            requestAnimationFrame(animate);
+        }
+        animate();
+    </script>
+</body>
+</html>
