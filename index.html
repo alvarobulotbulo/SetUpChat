@@ -3,707 +3,1060 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SetupChat | Tu Agencia de Ventas e Inteligencia Artificial</title>
+    <title>SetupChat - Tu Mejor Vendedor 24/7 con IA</title>
     <style>
         :root {
-            --accent: #6366f1;
-            --dark: #0f172a;
-            --light: #f8fafc;
-            --white: #ffffff;
-            --whatsapp: #25d366;
-            --gray: #64748b;
+            --bg-color: #ffffff;
+            --card-bg: #fbfbfd;
+            --primary: #0066cc;
+            --primary-hover: #004499;
+            --text-main: #1d1d1f;
+            --text-muted: #86868b;
+            --border-color: #d2d2d7;
+            --badge-bg: #f5f5f7;
+            --badge-text: #1d1d1f;
+            --seal-blue: #1d3557;
+            --whatsapp-green: #25D366;
+            --whatsapp-hover: #20ba5a;
+            --accent-sale: #e63946;
         }
-
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Inter', system-ui, -apple-system, sans-serif;
+            font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", "Helvetica Neue", Helvetica, Arial, sans-serif;
         }
-
         body {
-            background-color: var(--light);
-            color: var(--dark);
-            line-height: 1.6;
-        }
-
-        .container {
-            max-width: 1100px;
-            margin: 0 auto;
-            padding: 0 20px;
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            line-height: 1.5;
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
         }
         
-        /* Navbar */
-        nav {
-            padding: 20px 0;
+        /* Fondo de Esfera Tecnológica Animada */
+        .hero-tech-bg {
+            position: absolute;
+            top: 0;
+            right: 5%;
+            width: 500px;
+            height: 500px;
+            z-index: 0;
+            pointer-events: none;
+            opacity: 0.85;
+        }
+        .hero-tech-bg canvas {
+            width: 100%;
+            height: 100%;
+        }
+
+        header {
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            padding: 1.2rem 2rem;
             display: flex;
             justify-content: space-between;
             align-items: center;
+            border-bottom: 1px solid var(--border-color);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        .logo {
+            font-weight: 700;
+            font-size: 1.3rem;
+            letter-spacing: -0.5px;
+            color: var(--text-main);
+        }
+        .logo span {
+            color: var(--primary);
+        }
+        .btn-nav {
+            background: transparent;
+            color: var(--text-main);
+            border: 1px solid var(--border-color);
+            padding: 0.4rem 1rem;
+            font-size: 0.85rem;
+            font-weight: 500;
+            border-radius: 20px;
+            text-decoration: none;
+            transition: all 0.2s;
+        }
+        .btn-nav:hover {
+            background: var(--text-main);
+            color: #ffffff;
+            border-color: var(--text-main);
+        }
+        .hero {
+            max-width: 1000px;
+            margin: 5rem auto 3rem auto;
+            text-align: left;
+            padding: 0 1.5rem;
+            position: relative;
+            z-index: 1;
+        }
+        .hero-content {
+            max-width: 600px;
+        }
+        .badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: var(--badge-bg);
+            color: var(--badge-text);
+            padding: 0.35rem 1rem;
+            border-radius: 20px;
+            font-weight: 500;
+            font-size: 0.8rem;
+            margin-bottom: 1.5rem;
+        }
+        .hero h1 {
+            font-size: 3.5rem;
+            font-weight: 700;
+            margin-bottom: 1.2rem;
+            letter-spacing: -1.5px;
+            line-height: 1.08;
+            color: var(--text-main);
+        }
+        .hero h1 span {
+            color: var(--primary);
+        }
+        .hero p {
+            font-size: 1.2rem;
+            color: var(--text-muted);
+            margin-bottom: 2.5rem;
+            font-weight: 400;
+        }
+        .btn-primary {
+            background-color: var(--primary);
+            color: #ffffff;
+            padding: 0.8rem 2rem;
+            font-size: 1rem;
+            font-weight: 500;
+            border-radius: 980px;
+            text-decoration: none;
+            display: inline-block;
+            transition: all 0.2s;
+        }
+        .btn-primary:hover {
+            background-color: var(--primary-hover);
         }
 
-        .logo-container {
+        /* Botón Flotante de WhatsApp / Prueba de IA */
+        .floating-wa-btn {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background-color: var(--whatsapp-green);
+            color: #ffffff;
+            padding: 0.85rem 1.4rem;
+            border-radius: 50px;
             display: flex;
             align-items: center;
             gap: 10px;
-        }
-
-        .logo {
-            font-size: 1.8rem;
-            font-weight: 800;
-            color: var(--dark);
-            letter-spacing: -1px;
-        }
-
-        .logo span {
-            color: var(--accent);
-        }
-        
-        .btn-whatsapp {
-            background: var(--whatsapp);
-            color: white;
-            padding: 10px 20px;
-            border-radius: 50px;
             text-decoration: none;
             font-weight: 600;
-            font-size: 0.9rem;
-            transition: background 0.3s;
+            font-size: 0.95rem;
+            box-shadow: 0 10px 25px rgba(37, 211, 102, 0.4);
+            z-index: 999;
+            transition: all 0.3s ease;
+            animation: floatPulse 2.5s infinite ease-in-out;
+        }
+        .floating-wa-btn:hover {
+            background-color: var(--whatsapp-hover);
+            transform: translateY(-3px);
+            box-shadow: 0 15px 30px rgba(37, 211, 102, 0.5);
+        }
+        .floating-wa-btn svg {
+            width: 22px;
+            height: 22px;
+            fill: #ffffff;
+        }
+        @keyframes floatPulse {
+            0% { transform: scale(1); box-shadow: 0 10px 25px rgba(37, 211, 102, 0.4); }
+            50% { transform: scale(1.04); box-shadow: 0 15px 35px rgba(37, 211, 102, 0.6); }
+            100% { transform: scale(1); box-shadow: 0 10px 25px rgba(37, 211, 102, 0.4); }
         }
 
-        .btn-whatsapp:hover {
-            background: #22bf5b;
-        }
-
-        /* Hero */
-        .hero {
-            padding: 70px 0 40px 0;
+        /* Sección de Animación de Flujos Omnicanal */
+        .channels-flow-section {
+            max-width: 950px;
+            margin: 4rem auto;
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            padding: 4rem 2rem;
+            border-radius: 24px;
             text-align: center;
         }
-
-        .badge {
-            background: #e0e7ff;
-            color: var(--accent);
-            padding: 8px 18px;
-            border-radius: 50px;
+        .channels-flow-section h2 {
+            font-size: 2rem;
             font-weight: 700;
-            font-size: 0.9rem;
-            margin-bottom: 25px;
-            display: inline-block;
-            box-shadow: 0 4px 10px rgba(99, 102, 241, 0.1);
+            margin-bottom: 0.5rem;
+            letter-spacing: -0.5px;
         }
-
-        .hero h1 {
-            font-size: 3.2rem;
-            line-height: 1.15;
-            margin-bottom: 20px;
-            letter-spacing: -1px;
-            color: var(--dark);
+        .channels-flow-section p {
+            color: var(--text-muted);
+            font-size: 1.05rem;
+            margin-bottom: 3.5rem;
         }
-
-        .hero h1 span {
-            color: var(--accent);
-        }
-
-        .hero p {
-            font-size: 1.15rem;
-            color: var(--gray);
-            max-width: 650px;
+        .flow-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: relative;
+            max-width: 800px;
             margin: 0 auto;
-            font-weight: 400;
         }
-
-        /* Secciones de Demostración (Zig-Zag) */
-        .darwin-demo-section {
-            padding: 40px 0 60px 0;
+        .channels-column {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            z-index: 2;
         }
-
-        .darwin-container {
+        .channel-badge {
+            background: #ffffff;
+            border: 1px solid var(--border-color);
+            padding: 0.7rem 1.4rem;
+            border-radius: 12px;
+            font-weight: 600;
+            font-size: 0.9rem;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.03);
             display: flex;
             align-items: center;
-            justify-content: space-between;
-            gap: 50px;
-            flex-wrap: wrap;
+            gap: 8px;
         }
-
-        .darwin-container.reverse {
-            flex-direction: row-reverse;
-        }
-
-        .phone-column {
-            flex: 1;
+        .ai-core-node {
+            background: var(--primary);
+            color: white;
+            width: 140px;
+            height: 140px;
+            border-radius: 50%;
             display: flex;
+            flex-direction: column;
+            align-items: center;
             justify-content: center;
-            min-width: 280px;
+            font-weight: 700;
+            font-size: 1.1rem;
+            box-shadow: 0 10px 30px rgba(0, 102, 204, 0.35);
+            position: relative;
+            z-index: 2;
+            animation: corePulse 3s infinite ease-in-out;
+        }
+        .ai-core-node span {
+            font-size: 0.75rem;
+            font-weight: 400;
+            opacity: 0.85;
+        }
+        @keyframes corePulse {
+            0% { transform: scale(1); box-shadow: 0 10px 30px rgba(0, 102, 204, 0.35); }
+            50% { transform: scale(1.05); box-shadow: 0 15px 40px rgba(0, 102, 204, 0.5); }
+            100% { transform: scale(1); box-shadow: 0 10px 30px rgba(0, 102, 204, 0.35); }
         }
 
-        .phone-mockup-frame {
-            width: 290px;
-            height: 580px;
-            border-radius: 36px;
-            border: 10px solid #0f172a;
-            overflow: hidden;
-            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.15);
+        .flow-lines {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+            pointer-events: none;
+        }
+        .connector-svg {
+            width: 100%;
+            height: 100%;
+        }
+        .animated-path {
+            fill: none;
+            stroke: #d2d2d7;
+            stroke-width: 2;
+            stroke-dasharray: 6 6;
+        }
+        .pulsing-dot {
+            fill: var(--primary);
+            animation: dashMove 2s infinite linear;
+        }
+        @keyframes dashMove {
+            0% { offset-distance: 0%; }
+            100% { offset-distance: 100%; }
+        }
+
+        /* Secciones de Video con Marco de Celular */
+        .feature-section {
+            max-width: 1000px;
+            margin: 6rem auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            align-items: center;
+            padding: 0 1.5rem;
+        }
+        .feature-text h2 {
+            font-size: 2.2rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            letter-spacing: -1px;
+        }
+        .feature-text p {
+            color: var(--text-muted);
+            font-size: 1.05rem;
+            margin-bottom: 1.2rem;
+        }
+        
+        .phone-mockup {
+            width: 280px;
+            margin: 0 auto;
+            background: #1a1a1a;
+            border-radius: 40px;
+            padding: 12px;
+            box-shadow: 0 25px 50px rgba(0,0,0,0.15), 0 0 0 1px rgba(255,255,255,0.1);
+            position: relative;
+        }
+        .phone-mockup::before {
+            content: '';
+            position: absolute;
+            top: 12px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 18px;
+            background: #1a1a1a;
+            border-bottom-left-radius: 10px;
+            border-bottom-right-radius: 10px;
+            z-index: 10;
+        }
+        .phone-screen {
+            width: 100%;
+            aspect-ratio: 9/19;
             background: #000;
+            border-radius: 32px;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
         }
-
-        .phone-mockup-frame video {
+        .phone-screen video {
             width: 100%;
             height: 100%;
             object-fit: cover;
         }
 
-        .text-column {
-            flex: 1;
-            min-width: 300px;
-            text-align: left;
-        }
-
-        .text-column h2 {
-            font-size: 2.3rem;
-            line-height: 1.2;
-            margin-bottom: 20px;
-            letter-spacing: -1px;
-            color: var(--dark);
-        }
-
-        .text-column h2 span {
-            color: var(--accent);
-        }
-
-        .text-column p {
-            font-size: 1.1rem;
-            color: var(--gray);
-            margin-bottom: 30px;
-            font-weight: 400;
-        }
-        
-        /* Pricing */
-        .pricing-section {
-            padding: 40px 0 60px 0;
-        }
-
-        .section-title {
+        /* Sección de Testimonios / Casos de Éxito */
+        .testimonials-section {
+            max-width: 1100px;
+            margin: 6rem auto;
+            padding: 0 1.5rem;
             text-align: center;
+        }
+        .testimonials-section h2 {
             font-size: 2.2rem;
-            margin-bottom: 40px;
-            font-weight: 800;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            letter-spacing: -1px;
         }
-
-        .pricing-grid {
+        .testimonials-section > p {
+            color: var(--text-muted);
+            font-size: 1.05rem;
+            margin-bottom: 3rem;
+        }
+        .testimonials-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(310px, 1fr));
-            gap: 30px;
-            align-items: stretch;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
         }
-
-        .plan {
-            background: var(--white);
-            padding: 40px;
-            border-radius: 20px;
-            box-shadow: 0 10px 15px -3px rgba(0,0,0,0.05);
-            border: 2px solid #e2e8f0;
+        .testimonial-card {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            padding: 2.5rem 2rem;
+            border-radius: 24px;
+            text-align: left;
             display: flex;
             flex-direction: column;
             justify-content: space-between;
-            transition: transform 0.3s, border-color 0.3s;
+        }
+        .testimonial-card p {
+            font-size: 0.98rem;
+            color: var(--text-main);
+            margin-bottom: 1.5rem;
+            line-height: 1.6;
+        }
+        .client-info h4 {
+            font-size: 1rem;
+            font-weight: 700;
+        }
+        .client-info span {
+            font-size: 0.85rem;
+            color: var(--text-muted);
         }
 
-        .plan:hover {
-            border-color: var(--accent);
-            transform: translateY(-5px);
+        /* Estilos de Precio con Oferta */
+        .old-price {
+            font-size: 1.1rem;
+            color: var(--text-muted);
+            text-decoration: line-through;
+            font-weight: 500;
+            display: block;
+            margin-bottom: -4px;
         }
-
-        .plan.featured {
-            border-color: var(--accent);
-            box-shadow: 0 20px 25px -5px rgba(99, 102, 241, 0.15);
-            position: relative;
-        }
-
-        .plan.featured::before {
-            content: "Más Popular";
-            position: absolute;
-            top: -12px;
-            left: 50%;
-            transform: translateX(-50%);
-            background: var(--accent);
-            color: white;
+        .sale-badge {
+            background-color: var(--accent-sale);
+            color: #ffffff;
             font-size: 0.75rem;
             font-weight: 700;
-            padding: 4px 12px;
-            border-radius: 20px;
-            text-transform: uppercase;
-        }
-
-        .plan h3 {
-            font-size: 1.5rem;
-            margin-bottom: 8px;
-        }
-
-        .plan p.desc {
-            color: var(--gray);
-            font-size: 0.95rem;
-            margin-bottom: 20px;
-        }
-
-        .promo-box {
-            background: #f0fdf4;
-            color: #166534;
-            padding: 8px 12px;
-            border-radius: 8px;
-            font-size: 0.85rem;
-            font-weight: 700;
-            margin-bottom: 15px;
-            border: 1px solid #bbf7d0;
-        }
-
-        .price {
-            font-size: 2.3rem;
-            font-weight: 800;
-            margin: 10px 0 25px 0;
-            color: var(--dark);
-        }
-
-        .price span {
-            font-size: 0.95rem;
-            font-weight: 500;
-            color: var(--gray);
-        }
-
-        .plan ul {
-            list-style: none;
-            margin-bottom: 30px;
-            flex-grow: 1;
-        }
-
-        .plan ul li {
-            margin-bottom: 12px;
-            color: var(--gray);
-            font-size: 0.95rem;
-            display: flex;
-            align-items: center;
-        }
-
-        .plan ul li::before {
-            content: "✓";
-            color: var(--accent);
-            font-weight: bold;
-            margin-right: 10px;
-        }
-
-        .btn {
-            display: block;
-            text-align: center;
-            padding: 14px 20px;
-            background: var(--dark);
-            color: white;
-            border-radius: 12px;
-            text-decoration: none;
-            font-weight: 600;
-            transition: background 0.2s;
-        }
-
-        .btn:hover {
-            background: #1e293b;
-        }
-
-        .plan.featured .btn {
-            background: var(--accent);
-        }
-
-        .plan.featured .btn:hover {
-            background: #4f46e5;
-        }
-
-        /* Sección de Preguntas Frecuentes (Estilo Darwin) */
-        .faq-darwin-section {
-            padding: 60px 0 80px 0;
-        }
-
-        .faq-darwin-container {
-            display: flex;
-            align-items: flex-start;
-            justify-content: space-between;
-            gap: 60px;
-            flex-wrap: wrap;
-        }
-
-        .faq-left-info {
-            flex: 1;
-            min-width: 300px;
-        }
-
-        .faq-badge {
-            background: #e0e7ff;
-            color: var(--accent);
-            padding: 6px 16px;
-            border-radius: 50px;
-            font-weight: 700;
-            font-size: 0.85rem;
-            margin-bottom: 20px;
+            padding: 0.2rem 0.6rem;
+            border-radius: 6px;
             display: inline-block;
+            margin-bottom: 0.2rem;
             text-transform: uppercase;
         }
+        .price-wrapper {
+            margin: 1rem 0;
+        }
 
-        .faq-left-info h2 {
+        /* Título de Planes */
+        .pricing-section-title {
+            text-align: center;
+            margin: 5rem auto 3rem auto;
+        }
+        .pricing-section-title h2 {
             font-size: 2.5rem;
-            font-weight: 900;
-            line-height: 1.15;
-            margin-bottom: 20px;
-            color: var(--dark);
+            font-weight: 700;
             letter-spacing: -1px;
+            margin-bottom: 0.5rem;
         }
-
-        .faq-left-info h2 span {
-            color: var(--accent);
+        .pricing-grid {
+            max-width: 1100px;
+            margin: 0 auto 5rem auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 2rem;
+            padding: 0 1.5rem;
         }
-
-        .faq-left-info p {
-            font-size: 1.05rem;
-            color: var(--gray);
-            line-height: 1.6;
-            margin-bottom: 30px;
-        }
-
-        .faq-right-list {
-            flex: 1.2;
-            min-width: 320px;
+        .pricing-card {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            padding: 2.5rem 2rem;
+            border-radius: 24px;
+            position: relative;
             display: flex;
             flex-direction: column;
-            gap: 15px;
+            justify-content: space-between;
+            transition: transform 0.2s;
+        }
+        .pricing-card:hover {
+            transform: translateY(-4px);
+        }
+        .pricing-card.featured {
+            border: 2px solid var(--primary);
+        }
+        .pricing-card h3 {
+            font-size: 1.3rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+        .price {
+            font-size: 2.3rem;
+            font-weight: 700;
+            color: var(--text-main);
+            letter-spacing: -1px;
+        }
+        .price span {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            font-weight: normal;
+        }
+        .features-list {
+            list-style: none;
+            text-align: left;
+            margin: 1.5rem 0 2rem 0;
+            border-top: 1px solid var(--border-color);
+            padding-top: 1.5rem;
+        }
+        .features-list li {
+            margin-bottom: 0.9rem;
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+            font-size: 0.9rem;
+            color: var(--text-muted);
         }
 
-        .faq-card {
-            background: var(--white);
+        /* Sección de Certificaciones estilo Sello Corporativo */
+        .tech-stack-section {
+            max-width: 1100px;
+            margin: 6rem auto;
+            padding: 0 1.5rem;
+            text-align: center;
+        }
+        .tech-stack-section h2 {
+            font-size: 2.2rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            letter-spacing: -1px;
+        }
+        .tech-stack-section > p {
+            color: var(--text-muted);
+            font-size: 1.05rem;
+            margin-bottom: 3.5rem;
+        }
+        .tech-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+            gap: 2rem;
+        }
+        .tech-card {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            padding: 2.5rem 1.5rem;
+            border-radius: 24px;
+            text-align: center;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .tech-card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.06);
+            border-color: var(--primary);
+        }
+        .corporate-seal {
+            width: 90px;
+            height: 90px;
+            margin: 0 auto 1.2rem auto;
+            border-radius: 50%;
+            border: 3px double var(--seal-blue);
+            background: #f0f4f8;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            color: var(--seal-blue);
+            position: relative;
+            box-shadow: 0 4px 12px rgba(29, 53, 87, 0.12);
+        }
+        .seal-stars {
+            font-size: 0.65rem;
+            letter-spacing: 2px;
+            margin-bottom: 2px;
+        }
+        .seal-icon {
+            font-size: 1.6rem;
+            line-height: 1;
+        }
+        .seal-text {
+            font-size: 0.55rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-top: 2px;
+        }
+        .tech-card h4 {
+            font-size: 1.15rem;
+            font-weight: 700;
+            margin-bottom: 0.4rem;
+            color: var(--text-main);
+        }
+        .tech-card p {
+            font-size: 0.88rem;
+            color: var(--text-muted);
+        }
+
+        /* Nueva Sección FAQ Estilo Darwin (Dos Columnas) */
+        .faq-section-darwin {
+            max-width: 1100px;
+            margin: 6rem auto;
+            padding: 0 1.5rem;
+            display: grid;
+            grid-template-columns: 1fr 1.2fr;
+            gap: 4rem;
+            align-items: start;
+        }
+        .faq-left-col .faqs-badge {
+            display: inline-block;
+            background: var(--primary);
+            color: #ffffff;
+            font-weight: 700;
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            padding: 0.35rem 1rem;
+            border-radius: 20px;
+            margin-bottom: 1.5rem;
+        }
+        .faq-left-col h2 {
+            font-size: 2.8rem;
+            font-weight: 700;
+            line-height: 1.15;
+            letter-spacing: -1.5px;
+            margin-bottom: 1.2rem;
+            color: var(--text-main);
+        }
+        .faq-left-col h2 span {
+            color: var(--primary);
+        }
+        .faq-left-col p {
+            color: var(--text-muted);
+            font-size: 1.05rem;
+            line-height: 1.6;
+            margin-bottom: 2rem;
+        }
+        .faq-right-col {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+        .faq-item-darwin {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
             border-radius: 16px;
-            border: 1px solid #e2e8f0;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.01);
             overflow: hidden;
             transition: border-color 0.2s;
         }
-
-        .faq-card:hover {
-            border-color: #cbd5e1;
+        .faq-item-darwin:hover {
+            border-color: var(--primary);
         }
-
-        .faq-question {
-            width: 100%;
-            background: none;
-            border: none;
-            padding: 22px 25px;
-            text-align: left;
+        .faq-question-darwin {
+            padding: 1.4rem 1.6rem;
             font-size: 1.05rem;
-            font-weight: 700;
-            color: var(--dark);
+            font-weight: 600;
+            color: var(--text-main);
+            cursor: pointer;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            cursor: pointer;
+            user-select: none;
         }
-
-        .faq-icon {
-            font-size: 1.3rem;
+        .faq-question-darwin::after {
+            content: '+';
+            font-size: 1.4rem;
             font-weight: 400;
-            color: var(--gray);
+            color: var(--text-muted);
             transition: transform 0.3s ease;
         }
-
-        .faq-answer {
+        .faq-item-darwin.active .faq-question-darwin::after {
+            transform: rotate(45deg);
+        }
+        .faq-answer-darwin {
             max-height: 0;
             overflow: hidden;
-            transition: max-height 0.3s ease, padding 0.3s ease;
-            padding: 0 25px;
-            color: var(--gray);
+            padding: 0 1.6rem;
+            color: var(--text-muted);
             font-size: 0.95rem;
             line-height: 1.6;
+            transition: max-height 0.3s ease, padding 0.3s ease;
         }
-
-        .faq-card.active .faq-answer {
-            max-height: 200px;
-            padding: 0 25px 22px 25px;
-        }
-
-        .faq-card.active .faq-icon {
-            transform: rotate(45deg);
-            color: var(--accent);
-        }
-
-        /* Widget Flotante */
-        @keyframes super-pulse {
-            0% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.7); transform: scale(1); }
-            50% { box-shadow: 0 0 0 20px rgba(37, 211, 102, 0); transform: scale(1.03); }
-            100% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0); transform: scale(1); }
-        }
-
-        .chat-widget-container {
-            position: fixed;
-            bottom: 25px;
-            right: 25px;
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            z-index: 1000;
-            cursor: pointer;
-        }
-
-        .chat-bubble {
-            background: white;
-            padding: 12px 16px;
-            border-radius: 16px;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.15);
-            font-size: 0.9rem;
-            font-weight: 600;
-            color: var(--dark);
-            border: 1px solid #e2e8f0;
-            position: relative;
-            animation: bounce-bubble 3s infinite ease-in-out;
-        }
-
-        @keyframes bounce-bubble {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-5px); }
-        }
-
-        .chat-widget-btn {
-            background: var(--whatsapp);
-            color: white;
-            width: 60px;
-            height: 60px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            box-shadow: 0 10px 25px rgba(37, 211, 102, 0.4);
-            animation: super-pulse 2s infinite;
-            transition: transform 0.2s;
-        }
-
-        .chat-widget-btn:hover {
-            transform: scale(1.1);
+        .faq-item-darwin.active .faq-answer-darwin {
+            max-height: 250px;
+            padding: 0 1.6rem 1.4rem 1.6rem;
         }
 
         footer {
+            background: var(--card-bg);
+            color: var(--text-muted);
             text-align: center;
-            padding: 40px 0;
-            color: var(--gray);
-            font-size: 0.9rem;
-            border-top: 1px solid #e2e8f0;
+            padding: 3rem 1.5rem;
+            margin-top: 6rem;
+            font-size: 0.85rem;
+            border-top: 1px solid var(--border-color);
         }
 
-        @media (max-width: 768px) {
-            .hero h1 { font-size: 2.4rem; }
-            .text-column h2 { font-size: 2rem; }
-            .darwin-container, .darwin-container.reverse {
-                flex-direction: column;
-                justify-content: center;
-                text-align: center;
-            }
-            .text-column {
-                text-align: center;
-            }
-            .faq-left-info h2 {
-                font-size: 2rem;
-            }
+        @media (max-width: 900px) {
+            .hero-tech-bg { display: none; }
+            .hero { text-align: center; }
+            .hero-content { max-width: 100%; }
+            .flow-container { flex-direction: column; gap: 30px; }
+            .flow-lines { display: none; }
+            .feature-section { grid-template-columns: 1fr; }
+            .faq-section-darwin { grid-template-columns: 1fr; gap: 2rem; }
+            .floating-wa-btn span { display: none; }
+            .floating-wa-btn { padding: 0.9rem; border-radius: 50%; }
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <nav>
-            <div class="logo-container">
-                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M21 11.5C21 16.7467 16.7467 21 11.5 21C9.93257 21 8.45265 20.6214 7.15175 19.9531L3 21L4.04689 16.8483C3.37861 15.5474 3 14.0674 3 12.5C3 7.25329 7.25329 3 12.5 3C17.7467 3 22 7.25329 22 12.5" stroke="#6366f1" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
-                    <path d="M8 12H16" stroke="#0f172a" stroke-width="2" stroke-linecap="round"/>
-                    <path d="M12 8V16" stroke="#0f172a" stroke-width="2" stroke-linecap="round"/>
+
+    <!-- Botón Flotante Fijo Inferior Derecho -->
+    <a href="https://wa.me/56942757701?text=Hola,%20quiero%20probar%20la%20IA%20de%20SetupChat" class="floating-wa-btn" target="_blank">
+        <svg viewBox="0 0 24 24">
+            <path d="M12.04 2c-5.46 0-9.9 4.44-9.9 9.9 0 1.75.46 3.45 1.32 4.95L2 22l5.35-1.42c1.43.78 3.05 1.19 4.69 1.19 5.46 0 9.9-4.44 9.9-9.9 0-2.65-1.03-5.14-2.9-7.01C17.18 3.03 14.69 2 12.04 2zM12.04 20.1c-1.42 0-2.81-.38-4.03-1.1l-.29-.17-3.03.8.81-2.95-.19-.31c-.81-1.3-1.23-2.8-1.23-4.33 0-4.52 3.68-8.2 8.2-8.2 2.19 0 4.25.85 5.8 2.4 1.55 1.55 2.4 3.61 2.4 5.8 0 4.52-3.68 8.2-8.2 8.2zm4.51-6.13c-.25-.12-1.47-.73-1.7-.82-.23-.09-.39-.13-.56.12-.17.25-.64.82-.79.99-.15.17-.3.19-.55.07-.25-.12-1.05-.39-2-1.24-.74-.66-1.24-1.48-1.39-1.73-.15-.25-.02-.38.11-.5.11-.11.25-.3.37-.45.12-.15.16-.25.24-.42.08-.17.04-.32-.02-.45-.06-.13-.56-1.35-.77-1.85-.2-.48-.41-.42-.56-.43h-.48c-.17 0-.45.06-.69.32-.24.25-.91.89-.91 2.17 0 1.28.93 2.52 1.06 2.69.13.17 1.83 2.79 4.43 3.91.62.27 1.1.43 1.48.55.62.2 1.18.17 1.62.1.5-.08 1.47-.6 1.68-1.18.21-.58.21-1.08.15-1.18-.06-.1-.23-.16-.48-.28z"/>
+        </svg>
+        <span>¿Quieres probar la IA?</span>
+    </a>
+
+    <header>
+        <div class="logo">Setup<span>Chat</span></div>
+        <a href="https://wa.me/56942757701?text=Hola,%20quiero%20información%20sobre%20SetupChat" class="btn-nav" target="_blank">Acceso Clientes</a>
+    </header>
+
+    <section class="hero">
+        <!-- Esfera Tecnológica Animada de Fondo -->
+        <div class="hero-tech-bg">
+            <canvas id="techSphere"></canvas>
+        </div>
+
+        <div class="hero-content">
+            <div class="badge">✦ Tu Empleado Digital 24/7</div>
+            <h1>Delega las conversaciones en tu <span>empleado-IA</span></h1>
+            <p>No pierdas más ventas un domingo a las 3:00 AM o en días festivos. Respondemos por ti en <strong>Instagram, Facebook Messenger y WhatsApp</strong>, conectando con tu catálogo y cerrando ventas de forma automática.</p>
+            <a href="https://wa.me/56942757701?text=Hola,%20quiero%20activar%20mi%20asistente%20SetupChat" class="btn-primary" target="_blank">Activar mi Vendedor IA</a>
+        </div>
+    </section>
+
+    <!-- Animación de Flujos Omnicanal con Líneas Conectoras y Pulsos Animados -->
+    <div class="channels-flow-section">
+        <h2>Unifica todos tus canales en un solo motor de ventas</h2>
+        <p>Los mensajes fluyen en tiempo real hacia la Inteligencia Artificial que procesa y cierra la venta al instante.</p>
+        
+        <div class="flow-container">
+            <div class="flow-lines">
+                <svg class="connector-svg" viewBox="0 0 800 250">
+                    <path class="animated-path" d="M 50 40 Q 200 40, 330 110" />
+                    <path class="animated-path" d="M 50 125 Q 200 125, 330 125" />
+                    <path class="animated-path" d="M 50 210 Q 200 210, 330 140" />
+                    <path class="animated-path" d="M 470 125 Q 600 80, 750 80" />
+                    <path class="animated-path" d="M 470 125 Q 600 170, 750 170" />
+
+                    <circle class="pulsing-dot" r="5">
+                        <animateMotion path="M 50 40 Q 200 40, 330 110" dur="2s" repeatCount="indefinite" />
+                    </circle>
+                    <circle class="pulsing-dot" r="5">
+                        <animateMotion path="M 50 125 Q 200 125, 330 125" dur="1.8s" repeatCount="indefinite" />
+                    </circle>
+                    <circle class="pulsing-dot" r="5">
+                        <animateMotion path="M 50 210 Q 200 210, 330 140" dur="2.2s" repeatCount="indefinite" />
+                    </circle>
+                    <circle class="pulsing-dot" r="5">
+                        <animateMotion path="M 470 125 Q 600 80, 750 80" dur="1.5s" repeatCount="indefinite" />
+                    </circle>
+                    <circle class="pulsing-dot" r="5">
+                        <animateMotion path="M 470 125 Q 600 170, 750 170" dur="1.9s" repeatCount="indefinite" />
+                    </circle>
                 </svg>
-                <div class="logo">SETUP<span>CHAT</span></div>
             </div>
-            <a href="https://wa.me/56942757701?text=Quiero%20contratar%20Inteligencia%20Artificial%20para%20mi%20negocio" class="btn-whatsapp" target="_blank">Escríbenos</a>
-        </nav>
 
-        <section class="hero">
-            <div class="badge">⚡ El Futuro de la IA es Hoy</div>
-            <h1>Transformamos tu WhatsApp en una <br><span>máquina de ventas 24/7</span></h1>
-            <p>Cada mensaje sin responder a tiempo es dinero perdido. Nosotros instalamos, configuramos y operamos todo por ti.</p>
-        </section>
-
-        <!-- SECCIÓN DE DEMOSTRACIÓN 1 -->
-        <section class="darwin-demo-section">
-            <div class="darwin-container">
-                <div class="phone-column">
-                    <div class="phone-mockup-frame">
-                        <video src="video-1.mp4" autoplay loop muted playsinline></video>
-                    </div>
-                </div>
-                <div class="text-column">
-                    <h2>Atiende a tus clientes en cualquier momento, <span>sin esfuerzo.</span></h2>
-                    <p>Olvídate de tiempos de espera: tu equipo podrá enfocarse en lo importante mientras SetupChat vende por ti, gestiona las preguntas, muestra tu catálogo y cierra ventas.</p>
-                    <a href="https://wa.me/56942757701?text=Quiero%20probar%20la%20IA%20de%20SetupChat" class="btn-whatsapp" style="display: inline-block; border-radius: 12px; padding: 14px 28px; font-size: 1rem;">Prueba SetupChat →</a>
-                </div>
+            <!-- Canales de Entrada -->
+            <div class="channels-column">
+                <div class="channel-badge">💬 WhatsApp Business</div>
+                <div class="channel-badge">📸 Instagram Direct</div>
+                <div class="channel-badge">💙 Facebook Messenger</div>
             </div>
-        </section>
 
-        <!-- SECCIÓN DE DEMOSTRACIÓN 2 (Zig-Zag) -->
-        <section class="darwin-demo-section" style="background-color: #f1f5f9; border-radius: 24px; padding: 50px 30px; margin-bottom: 40px;">
-            <div class="darwin-container reverse">
-                <div class="phone-column">
-                    <div class="phone-mockup-frame">
-                        <video src="video-2.mp4" autoplay loop muted playsinline></video>
-                    </div>
-                </div>
-                <div class="text-column">
-                    <h2>Todos tus canales de venta, <span>automatizados y unificados</span></h2>
-                    <p>Simplifica la gestión de tus canales de venta y garantiza respuestas rápidas, consistentes y siempre disponibles para que ningún cliente se quede sin comprar.</p>
-                    <a href="https://wa.me/56942757701?text=Quiero%20automatizar%20mis%20canales%20de%20venta" class="btn-whatsapp" style="display: inline-block; border-radius: 12px; padding: 14px 28px; font-size: 1rem;">Prueba SetupChat →</a>
-                </div>
+            <!-- Núcleo de IA Central -->
+            <div class="ai-core-node">
+                SetupChat
+                <span>Motor de IA 24/7</span>
             </div>
-        </section>
 
-        <section class="pricing-section">
-            <h2 class="section-title">Planes Transparentes</h2>
-            <div class="pricing-grid">
-                
-                <!-- Plan Esencial -->
-                <div class="plan">
-                    <div>
-                        <h3>Esencial</h3>
-                        <p class="desc">Ideal para empezar rápido.</p>
-                        <div class="promo-box">🎁 Setup Inicial + 1° Mes GRATIS</div>
-                        <div class="price">$175.000 <span>/mes</span></div>
-                        <ul>
-                            <li>Setup inicial llave en mano (GRATIS)</li>
-                            <li>IA WhatsApp (hasta 500 chats)</li>
-                            <li>Catálogo básico integrado</li>
-                            <li>Soporte técnico 24/7</li>
-                        </ul>
-                    </div>
-                    <a href="https://www.flow.cl/btn.php?token=ycd5374f619fa3fab19f43e5f686b0767bdb9a2d" class="btn" target="_blank">Elegir Esencial</a>
-                </div>
-
-                <!-- Plan Profesional -->
-                <div class="plan featured">
-                    <div>
-                        <h3>Profesional</h3>
-                        <p class="desc">IA avanzada + Gestión de Pauta.</p>
-                        <div class="promo-box">🎁 Setup Inicial + 1° Mes GRATIS</div>
-                        <div class="price">$230.000 <span>/mes</span></div>
-                        <ul>
-                            <li>Setup inicial llave en mano (GRATIS)</li>
-                            <li>IA con acceso a base de datos</li>
-                            <li>Gestión de Ads (Meta)</li>
-                            <li>Reportes de ventas mensuales</li>
-                        </ul>
-                    </div>
-                    <a href="https://www.flow.cl/btn.php?token=sc6078c77a179113d570f5784096ebb5dd7a41b5" class="btn" target="_blank">Elegir Profesional</a>
-                </div>
-
-                <!-- Plan Enterprise -->
-                <div class="plan">
-                    <div>
-                        <h3>Enterprise</h3>
-                        <p class="desc">Integración total para empresas.</p>
-                        <div class="promo-box">🎁 Setup Inicial + 1° Mes GRATIS</div>
-                        <div class="price">$290.000 <span>/mes</span></div>
-                        <ul>
-                            <li>Setup inicial llave en mano (GRATIS)</li>
-                            <li>IA con entrenamiento profundo</li>
-                            <li>CRM Integrado</li>
-                            <li>Conexión API avanzada</li>
-                            <li>Soporte VIP prioritario</li>
-                        </ul>
-                    </div>
-                    <a href="https://www.flow.cl/btn.php?token=sc6078c77a179113d570f5784096ebb5dd7a41b5" class="btn" target="_blank">Elegir Enterprise</a>
-                </div>
-
+            <!-- Salida de Ventas Cerradas -->
+            <div class="channels-column">
+                <div class="channel-badge" style="border-color: var(--primary); color: var(--primary);">🎯 Venta Cerrada</div>
+                <div class="channel-badge" style="border-color: var(--primary); color: var(--primary);">📦 Pedido a Despacho</div>
             </div>
-        </section>
-
-        <!-- PREGUNTAS FRECUENTES -->
-        <section class="faq-darwin-section">
-            <div class="faq-darwin-container">
-                
-                <div class="faq-left-info">
-                    <div class="faq-badge">FAQs</div>
-                    <h2>Todo lo que Necesitas Saber sobre <span>SetupChat</span></h2>
-                    <p>Descubre cómo nuestra inteligencia artificial puede transformar tus operaciones, automatizando procesos clave y mejorando la eficiencia de tu negocio con respuestas precisas y personalizadas.</p>
-                    <a href="https://wa.me/56942757701?text=Quiero%20saber%20mas%20sobre%20SetupChat" class="btn-whatsapp" style="display: inline-block; border-radius: 12px; padding: 14px 28px; font-size: 1rem;">Prueba SetupChat →</a>
-                </div>
-
-                <div class="faq-right-list">
-                    
-                    <div class="faq-card">
-                        <button class="faq-question">
-                            ¿Cómo funciona la promoción del Setup y el primer mes gratis?
-                            <span class="faq-icon">+</span>
-                        </button>
-                        <div class="faq-answer">
-                            Al elegir cualquiera de nuestros planes, el costo de configuración inicial y la primera mensualidad de operación van por nuestra cuenta. Comienzas a pagar tu suscripción mensual recién a partir del segundo mes de uso.
-                        </div>
-                    </div>
-
-                    <div class="faq-card">
-                        <button class="faq-question">
-                            ¿Qué significa "hasta 500 chats" en el plan Esencial?
-                            <span class="faq-icon">+</span>
-                        </button>
-                        <div class="faq-answer">
-                            Se refiere a hasta 500 usuarios o clientes únicos interactuando con tu asistente de inteligencia artificial durante el mes. Si un mismo cliente te escribe varias veces, cuenta como una sola conversación activa.
-                        </div>
-                    </div>
-
-                    <div class="faq-card">
-                        <button class="faq-question">
-                            ¿Tengo que saber de programación o configurar algo técnico?
-                            <span class="faq-icon">+</span>
-                        </button>
-                        <div class="faq-answer">
-                            Absolutamente no. Nuestro servicio es 100% "llave en mano". Nosotros nos encargamos de todo el montaje en tu WhatsApp Business, diseño de catálogos y entrenamiento de la inteligencia artificial.
-                        </div>
-                    </div>
-
-                    <div class="faq-card">
-                        <button class="faq-question">
-                            ¿Qué pasa si mi negocio supera los chats mensuales contratados?
-                            <span class="faq-icon">+</span>
-                        </button>
-                        <div class="faq-answer">
-                            Significa que el sistema te está trayendo excelentes resultados. En ese momento, te ayudamos a escalar de forma sencilla al siguiente plan para seguir operando sin interrupciones.
-                        </div>
-                    </div>
-
-                </div>
-
-            </div>
-        </section>
-
-        <footer>
-            <p>&copy; 2026 SetupChat. Todos los derechos reservados.</p>
-        </footer>
-    </div>
-
-    <!-- Widget Flotante -->
-    <div class="chat-widget-container" onclick="window.open('https://wa.me/56942757701?text=Quiero%20contratar%20Inteligencia%20Artificial%20para%20mi%20negocio', '_blank')">
-        <div class="chat-bubble">
-            💬 ¿Quieres probar la IA ahora mismo?
-        </div>
-        <div class="chat-widget-btn">
-            <svg width="32" height="32" viewBox="0 0 24 24" fill="white">
-                <path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074--2.972-1.49-4.925-2.678-6.891-6.075-.125-.216-.013-.333.109-.447.111-.107.248-.272.372-.408.125-.137.166-.232.248-.387.082-.155.041-.297-.02-.418-.062-.122-.57-1.382-.782-1.893-.206-.505-.415-.437-.57-.445-.148-.008-.318-.008-.488-.008-.17 0-.447.062-.682.315-.235.253-.902.882-.902 2.152 0 1.27 1.253 2.5 1.427 2.706.173.456 2.459 3.753 5.954 5.263.832.359 1.481.574 1.988.735.836.265 1.596.227 2.194.138.67-.1 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414z"/>
-            </svg>
         </div>
     </div>
 
-    <!-- Script para el acordeón de Preguntas Frecuentes -->
+    <!-- Sección del Primer Video (Enmarcado en Celular) -->
+    <section class="feature-section">
+        <div class="feature-text">
+            <h2>Los agentes de IA actúan como un miembro más de tu equipo</h2>
+            <p>Olvídate de pasar horas respondiendo "¿cuánto vale?", "¿hay stock?" o "¿cuál es la dirección?". Tu asistente virtual atiende al instante, filtra curiosos y deja la venta lista.</p>
+            <p><strong>Funciona sin descanso, feriados y fines de semana</strong>, asegurando que tu negocio facture en piloto automático.</p>
+        </div>
+        
+        <div class="phone-mockup">
+            <div class="phone-screen">
+                <video autoplay muted loop playsinline>
+                    <source src="TU_VIDEO_1.mp4" type="video/mp4">
+                    Tu navegador no soporta video HTML5.
+                </video>
+            </div>
+        </div>
+    </section>
+
+    <!-- Sección del Segundo Video (Con texto técnico correcto al lado) -->
+    <section class="feature-section">
+        <div class="phone-mockup">
+            <div class="phone-screen">
+                <video autoplay muted loop playsinline>
+                    <source src="TU_VIDEO_2.mp4" type="video/mp4">
+                    Tu navegador no soporta video HTML5.
+                </video>
+            </div>
+        </div>
+        <div class="feature-text">
+            <h2>Control total de tu inventario y stock en tiempo real</h2>
+            <p>La inteligencia artificial no solo chatea, sino que consulta tus bases de datos al instante para confirmar disponibilidad, precios exactos y características.</p>
+            <p><strong>Operación fluida, rápida y libre de errores humanos</strong> que garantiza que cada cliente reciba la información correcta al momento de comprar.</p>
+        </div>
+    </section>
+
+    <!-- Sección de Testimonios / Casos de Éxito -->
+    <section class="testimonials-section">
+        <h2>Lo que dicen los dueños de negocios</h2>
+        <p>Resultados reales de empresas que ya automatizaron sus canales con SetupChat.</p>
+        
+        <div class="testimonials-grid">
+            <div class="testimonial-card">
+                <p>"Antes perdíamos muchos clientes en la noche o los fines de semana. Desde que implementamos el asistente, nuestras ventas nocturnas aumentaron notablemente sin contratar más personal."</p>
+                <div class="client-info">
+                    <h4>Carlos Mendoza</h4>
+                    <span>E-commerce de Retail</span>
+                </div>
+            </div>
+
+            <div class="testimonial-card">
+                <p>"La integración con el catálogo y el stock en tiempo real es una maravilla. La IA responde precios exactos y los clientes llegan directo a transferir."</p>
+                <div class="client-info">
+                    <h4>Andrea Valenzuela</h4>
+                    <span>Empresa de Servicios & Distribución</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Título de Planes -->
+    <div class="pricing-section-title">
+        <h2>Planes adaptados a tu negocio</h2>
+        <p>Selecciona el nivel de automatización ideal para escalar tu facturación.</p>
+    </div>
+
+    <!-- Grilla de 3 Planes -->
+    <div class="pricing-grid">
+        <!-- Plan Esencial (Con Oferta 50% Off) -->
+        <div class="pricing-card">
+            <div>
+                <h3>Plan Esencial</h3>
+                <div class="price-wrapper">
+                    <span class="old-price">$100.000</span>
+                    <div class="sale-badge">50% OFF</div>
+                    <div class="price">$49.990 <span>/ mes</span></div>
+                </div>
+                <ul class="features-list">
+                    <li>✓ Automatización avanzada en WhatsApp, Instagram y Messenger.</li>
+                    <li>✓ IA entrenada con tu catálogo y precios generales.</li>
+                    <li>✓ Soporte continuo y permanente de nuestro equipo.</li>
+                    <li>🎁 <strong>Implementación y configuración: $0 (Gratis)</strong>.</li>
+                </ul>
+            </div>
+            <a href="https://wa.me/56942757701?text=Hola,%20quiero%20contratar%20el%20Plan%20Esencial" class="btn-primary" style="width: 100%; text-align: center; display: block; margin-top: 0;" target="_blank">Elegir Esencial</a>
+        </div>
+
+        <!-- Plan Profesional (Destacado) -->
+        <div class="pricing-card featured">
+            <div>
+                <h3>Plan Profesional</h3>
+                <div class="price-wrapper" style="margin: 1rem 0;">
+                    <div class="price" style="margin-top: 1.65rem;">$175.000 <span>/ mes</span></div>
+                </div>
+                <ul class="features-list">
+                    <li>✓ Todo lo incluido en el Plan Esencial.</li>
+                    <li>✓ <strong>Conexión profunda a base de datos de catálogo y stock</strong>.</li>
+                    <li>✓ Respuestas automáticas de inventario en tiempo real.</li>
+                    <li>🎁 <strong>Implementación y configuración: $0 (Gratis)</strong>.</li>
+                </ul>
+            </div>
+            <a href="https://wa.me/56942757701?text=Hola,%20quiero%20contratar%20el%20Plan%20Profesional" class="btn-primary" style="width: 100%; text-align: center; display: block; margin-top: 0;" target="_blank">Elegir Profesional</a>
+        </div>
+
+        <!-- Plan Enterprise -->
+        <div class="pricing-card">
+            <div>
+                <h3>Plan Enterprise</h3>
+                <div class="price-wrapper" style="margin: 1rem 0;">
+                    <div class="price" style="margin-top: 1.65rem;">A medida</div>
+                </div>
+                <ul class="features-list">
+                    <li>✓ Todo lo incluido en el Plan Profesional.</li>
+                    <li>✓ <strong>Gestión y respuesta automática omnicanal avanzada</strong>.</li>
+                    <li>✓ Reuniones de consultoría y soporte prioritario 1 a 1.</li>
+                    <li>🎁 <strong>Implementación y configuración: $0 (Gratis)</strong>.</li>
+                </ul>
+            </div>
+            <a href="https://wa.me/56942757701?text=Hola,%20quiero%20conversar%20sobre%20el%20Plan%20Enterprise" class="btn-primary" style="width: 100%; text-align: center; display: block; margin-top: 0;" target="_blank">Contactar Ventas</a>
+        </div>
+    </div>
+
+    <!-- Sección de Certificaciones estilo Sello Corporativo -->
+    <section class="tech-stack-section">
+        <h2>Infraestructura y Certificaciones Tecnológicas</h2>
+        <p>Garantizamos máxima velocidad, seguridad de datos y cumplimiento con alianzas globales oficiales.</p>
+        
+        <div class="tech-grid">
+            <div class="tech-card">
+                <div class="corporate-seal">
+                    <div class="seal-stars">★★★</div>
+                    <div class="seal-icon">🧠</div>
+                    <div class="seal-text">Certified</div>
+                </div>
+                <h4>OpenAI Engine</h4>
+                <p>Modelos de lenguaje avanzados para interacciones comerciales de alta naturalidad.</p>
+            </div>
+
+            <div class="tech-card">
+                <div class="corporate-seal">
+                    <div class="seal-stars">★★★</div>
+                    <div class="seal-icon">⚡</div>
+                    <div class="seal-text">Partner</div>
+                </div>
+                <h4>n8n Expert</h4>
+                <p>Orquestación robusta y automatización experta de flujos empresariales.</p>
+            </div>
+
+            <div class="tech-card">
+                <div class="corporate-seal">
+                    <div class="seal-stars">★★★</div>
+                    <div class="seal-icon">💬</div>
+                    <div class="seal-text">Verified</div>
+                </div>
+                <h4>Evolution API</h4>
+                <p>Conectividad estable y segura con el ecosistema de mensajería Meta.</p>
+            </div>
+
+            <div class="tech-card">
+                <div class="corporate-seal">
+                    <div class="seal-stars">★★★</div>
+                    <div class="seal-icon">☁️</div>
+                    <div class="seal-text">Secure NYC</div>
+                </div>
+                <h4>NYC Data Center</h4>
+                <p>Servidores dedicados de ultra alta velocidad alojados en Nueva York.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Nueva Sección: Preguntas Frecuentes (FAQ) Estilo Darwin -->
+    <section class="faq-section-darwin">
+        <div class="faq-left-col">
+            <div class="faqs-badge">FAQs</div>
+            <h2>Todo lo que Necesitas Saber sobre <span>SetupChat</span></h2>
+            <p>Descubre cómo SetupChat puede transformar tus operaciones, automatizando procesos clave y mejorando la eficiencia de tu negocio con respuestas precisas y personalizadas.</p>
+            <a href="https://wa.me/56942757701?text=Hola,%20quiero%20probar%20SetupChat" class="btn-primary" target="_blank">Prueba SetupChat →</a>
+        </div>
+        
+        <div class="faq-right-col">
+            <div class="faq-item-darwin">
+                <div class="faq-question-darwin">¿Cómo evita SetupChat errores en las respuestas de tus empleados digitales?</div>
+                <div class="faq-answer-darwin">Nos conectamos directamente a tu base de datos y catálogos oficiales. La IA no improvisa precios ni inventa stock; responde estrictamente con la información actualizada de tu negocio.</div>
+            </div>
+
+            <div class="faq-item-darwin">
+                <div class="faq-question-darwin">¿Qué canales de atención puede optimizar SetupChat?</div>
+                <div class="faq-answer-darwin">Unificamos de manera simultánea WhatsApp Business, Instagram Direct y Facebook Messenger en un solo motor inteligente que atiende 24/7.</div>
+            </div>
+
+            <div class="faq-item-darwin">
+                <div class="faq-question-darwin">¿La IA de SetupChat aprende sola y evoluciona con las conversaciones?</div>
+                <div class="faq-answer-darwin">Utiliza modelos avanzados de lenguaje adaptados con tus directrices comerciales para mantener interacciones naturales, guiando siempre al cliente hacia el cierre de la venta.</div>
+            </div>
+
+            <div class="faq-item-darwin">
+                <div class="faq-question-darwin">¿Se le puede dar a SetupChat una impronta propia del país de cada cliente?</div>
+                <div class="faq-answer-darwin">¡Totalmente! Entrenamos al asistente virtual con los modismos, tono y forma de comunicación local (como el español de Chile) para que la interacción sea completamente cercana y natural.</div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <p>© 2026 SetupChat (www.setupchat.cl). Todos los derechos reservados.</p>
+    </footer>
+
+    <!-- Script de Acordeón FAQ y Animación 3D de Esfera -->
     <script>
-        document.querySelectorAll('.faq-question').forEach(button => {
-            button.addEventListener('click', () => {
-                const card = button.parentElement;
-                document.querySelectorAll('.faq-card').forEach(item => {
-                    if (item !== card) {
-                        item.classList.remove('active');
-                    }
+        // Funcionalidad de Acordeón para las FAQ
+        document.querySelectorAll('.faq-question-darwin').forEach(question => {
+            question.addEventListener('click', () => {
+                const item = question.parentElement;
+                const isActive = item.classList.contains('active');
+                
+                // Cierra todos los demás elementos
+                document.querySelectorAll('.faq-item-darwin').forEach(faq => {
+                    faq.classList.remove('active');
                 });
-                card.classList.toggle('active');
+
+                // Si no estaba activo, lo abre
+                if (!isActive) {
+                    item.classList.add('active');
+                }
             });
         });
+
+        // Script de Animación 3D (Esfera / Nube de Malla Tecnológica)
+        const canvas = document.getElementById('techSphere');
+        const ctx = canvas.getContext('2d');
+
+        function resize() {
+            canvas.width = canvas.parentElement.clientWidth;
+            canvas.height = canvas.parentElement.clientHeight;
+        }
+        resize();
+        window.addEventListener('resize', resize);
+
+        let angle = 0;
+        const dots = [];
+        const numDots = 180;
+        const radius = 160;
+
+        for (let i = 0; i < numDots; i++) {
+            const phi = Math.acos(-1 + (2 * i) / numDots);
+            const theta = Math.sqrt(numDots * Math.PI) * phi;
+            dots.push({
+                x: radius * Math.cos(theta) * Math.sin(phi),
+                y: radius * Math.sin(theta) * Math.sin(phi),
+                z: radius * Math.cos(phi)
+            });
+        }
+
+        function animate() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            const cx = canvas.width / 2;
+            const cy = canvas.height / 2;
+
+            angle += 0.008;
+
+            const cos = Math.cos(angle);
+            const sin = Math.sin(angle);
+
+            for (let i = 0; i < dots.length; i++) {
+                let dot = dots[i];
+                let x = dot.x * cos - dot.z * sin;
+                let z = dot.z * cos + dot.x * sin;
+                let y = dot.y;
+
+                let scale = 300 / (300 + z);
+                let px = x * scale + cx;
+                let py = y * scale + cy;
+
+                if (scale > 0) {
+                    ctx.fillStyle = `rgba(0, 102, 204, ${0.15 + scale * 0.4})`;
+                    ctx.beginPath();
+                    ctx.arc(px, py, scale * 2.2, 0, Math.PI * 2);
+                    ctx.fill();
+                }
+
+                for (let j = i + 1; j < dots.length; j++) {
+                    let dot2 = dots[j];
+                    let x2 = dot2.x * cos - dot2.z * sin;
+                    let z2 = dot2.z * cos + dot2.x * sin;
+                    let y2 = dot2.y;
+
+                    let dist = Math.hypot(x - x2, y - y2, z - z2);
+                    if (dist < 40) {
+                        let scale2 = 300 / (300 + z2);
+                        let px2 = x2 * scale2 + cx;
+                        let py2 = y2 * scale2 + cy;
+
+                        ctx.strokeStyle = `rgba(0, 102, 204, ${0.08 * (1 - dist / 40)})`;
+                        ctx.lineWidth = 0.75;
+                        ctx.beginPath();
+                        ctx.moveTo(px, py);
+                        ctx.lineTo(px2, py2);
+                        ctx.stroke();
+                    }
+                }
+            }
+            requestAnimationFrame(animate);
+        }
+        animate();
     </script>
 </body>
 </html>
