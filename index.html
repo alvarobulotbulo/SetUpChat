@@ -179,7 +179,7 @@
             100% { transform: scale(1); box-shadow: 0 10px 25px rgba(37, 211, 102, 0.4); }
         }
 
-        /* Sección de Animación de Flujos Omnicanal */
+        /* Sección de Animación de Flujos Omnicanal (Muy Vistosa) */
         .channels-flow-section {
             max-width: 950px;
             margin: 4rem auto;
@@ -216,12 +216,12 @@
         }
         .channel-badge {
             background: #ffffff;
-            border: 1px solid var(--border-color);
-            padding: 0.7rem 1.4rem;
+            border: 2px solid var(--border-color);
+            padding: 0.8rem 1.4rem;
             border-radius: 12px;
             font-weight: 600;
-            font-size: 0.9rem;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.03);
+            font-size: 0.95rem;
+            box-shadow: 0 6px 16px rgba(0,0,0,0.05);
             display: flex;
             align-items: center;
             gap: 8px;
@@ -229,16 +229,16 @@
         .ai-core-node {
             background: var(--primary);
             color: white;
-            width: 140px;
-            height: 140px;
+            width: 150px;
+            height: 150px;
             border-radius: 50%;
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
             font-weight: 700;
-            font-size: 1.1rem;
-            box-shadow: 0 10px 30px rgba(0, 102, 204, 0.35);
+            font-size: 1.15rem;
+            box-shadow: 0 12px 35px rgba(0, 102, 204, 0.45);
             position: relative;
             z-index: 2;
             animation: corePulse 3s infinite ease-in-out;
@@ -246,12 +246,12 @@
         .ai-core-node span {
             font-size: 0.75rem;
             font-weight: 400;
-            opacity: 0.85;
+            opacity: 0.9;
         }
         @keyframes corePulse {
-            0% { transform: scale(1); box-shadow: 0 10px 30px rgba(0, 102, 204, 0.35); }
-            50% { transform: scale(1.05); box-shadow: 0 15px 40px rgba(0, 102, 204, 0.5); }
-            100% { transform: scale(1); box-shadow: 0 10px 30px rgba(0, 102, 204, 0.35); }
+            0% { transform: scale(1); box-shadow: 0 12px 35px rgba(0, 102, 204, 0.45); }
+            50% { transform: scale(1.06); box-shadow: 0 18px 45px rgba(0, 102, 204, 0.65); }
+            100% { transform: scale(1); box-shadow: 0 12px 35px rgba(0, 102, 204, 0.45); }
         }
 
         .flow-lines {
@@ -269,13 +269,15 @@
         }
         .animated-path {
             fill: none;
-            stroke: #d2d2d7;
-            stroke-width: 2;
-            stroke-dasharray: 6 6;
+            stroke: #0066cc; /* Azul más llamativo */
+            stroke-width: 3.5; /* Línea más gruesa y vistosa */
+            stroke-dasharray: 8 6;
+            opacity: 0.65;
         }
         .pulsing-dot {
             fill: var(--primary);
-            animation: dashMove 2s infinite linear;
+            filter: drop-shadow(0 0 4px rgba(0, 102, 204, 0.8));
+            animation: dashMove 1.6s infinite linear;
         }
         @keyframes dashMove {
             0% { offset-distance: 0%; }
@@ -612,14 +614,18 @@
             border-top: 1px solid var(--border-color);
         }
 
+        /* MEDIA QUERIES PARA ADAPTARSE A CELULARES DE FORMA LIMPIA Y VISIBLE */
         @media (max-width: 900px) {
             .hero-tech-bg { display: none; }
             .hero { text-align: center; margin: 3rem auto 2rem auto; }
             .hero-content { max-width: 100%; }
             .hero h1 { font-size: 2.4rem; }
-            .channels-flow-section { padding: 2rem 1rem; margin: 2rem 1rem; overflow: hidden; }
-            .flow-container { flex-direction: column; gap: 30px; }
-            .flow-lines { display: block; transform: rotate(90deg); opacity: 0.4; }
+            
+            /* Diagrama Omnicanal adaptado a móvil: compacto pero manteniendo el círculo central brillante */
+            .channels-flow-section { padding: 2.5rem 1rem; margin: 2rem 1rem; }
+            .flow-container { flex-direction: column; gap: 20px; }
+            .flow-lines { display: none; } /* En pantallas muy estrechas ocultamos las líneas SVG cruzadas para evitar cortes y priorizamos el núcleo flotante */
+            
             .feature-section { 
                 grid-template-columns: 1fr; 
                 gap: 2.5rem; 
@@ -662,7 +668,7 @@
         </div>
     </section>
 
-    <!-- Animación de Flujos Omnicanal con Líneas Conectoras y Pulsos Animados -->
+    <!-- Animación de Flujos Omnicanal con Líneas Conectoras Vistosas -->
     <div class="channels-flow-section">
         <h2>Unifica todos tus canales en un solo motor de ventas</h2>
         <p>Los mensajes fluyen en tiempo real hacia la Inteligencia Artificial que procesa y cierra la venta al instante.</p>
@@ -676,20 +682,20 @@
                     <path class="animated-path" d="M 470 125 Q 600 80, 750 80" />
                     <path class="animated-path" d="M 470 125 Q 600 170, 750 170" />
 
-                    <circle class="pulsing-dot" r="5">
-                        <animateMotion path="M 50 40 Q 200 40, 330 110" dur="2s" repeatCount="indefinite" />
+                    <circle class="pulsing-dot" r="6">
+                        <animateMotion path="M 50 40 Q 200 40, 330 110" dur="1.6s" repeatCount="indefinite" />
                     </circle>
-                    <circle class="pulsing-dot" r="5">
-                        <animateMotion path="M 50 125 Q 200 125, 330 125" dur="1.8s" repeatCount="indefinite" />
+                    <circle class="pulsing-dot" r="6">
+                        <animateMotion path="M 50 125 Q 200 125, 330 125" dur="1.4s" repeatCount="indefinite" />
                     </circle>
-                    <circle class="pulsing-dot" r="5">
-                        <animateMotion path="M 50 210 Q 200 210, 330 140" dur="2.2s" repeatCount="indefinite" />
+                    <circle class="pulsing-dot" r="6">
+                        <animateMotion path="M 50 210 Q 200 210, 330 140" dur="1.8s" repeatCount="indefinite" />
                     </circle>
-                    <circle class="pulsing-dot" r="5">
-                        <animateMotion path="M 470 125 Q 600 80, 750 80" dur="1.5s" repeatCount="indefinite" />
+                    <circle class="pulsing-dot" r="6">
+                        <animateMotion path="M 470 125 Q 600 80, 750 80" dur="1.3s" repeatCount="indefinite" />
                     </circle>
-                    <circle class="pulsing-dot" r="5">
-                        <animateMotion path="M 470 125 Q 600 170, 750 170" dur="1.9s" repeatCount="indefinite" />
+                    <circle class="pulsing-dot" r="6">
+                        <animateMotion path="M 470 125 Q 600 170, 750 170" dur="1.5s" repeatCount="indefinite" />
                     </circle>
                 </svg>
             </div>
@@ -701,7 +707,7 @@
                 <div class="channel-badge">💙 Facebook Messenger</div>
             </div>
 
-            <!-- Núcleo de IA Central -->
+            <!-- Núcleo de IA Central (Garantizado visible en PC y Móvil) -->
             <div class="ai-core-node">
                 SetupChat
                 <span>Motor de IA 24/7</span>
@@ -979,20 +985,4 @@
                     if (dist < 40) {
                         let scale2 = 300 / (300 + z2);
                         let px2 = x2 * scale2 + cx;
-                        let py2 = y2 * scale2 + cy;
-
-                        ctx.strokeStyle = `rgba(0, 102, 204, ${0.08 * (1 - dist / 40)})`;
-                        ctx.lineWidth = 0.75;
-                        ctx.beginPath();
-                        ctx.moveTo(px, py);
-                        ctx.lineTo(px2, py2);
-                        ctx.stroke();
-                    }
-                }
-            }
-            requestAnimationFrame(animate);
-        }
-        animate();
-    </script>
-</body>
-</html>
+                        let py2 = y2
