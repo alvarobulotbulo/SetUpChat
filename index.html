@@ -34,16 +34,17 @@
             -webkit-font-smoothing: antialiased;
         }
         
-        /* Fondo de Esfera Tecnológica Animada */
+        /* Fondo de Esfera Tecnológica Animada (Optimizada para Celular y PC) */
         .hero-tech-bg {
             position: absolute;
             top: 0;
-            right: 5%;
-            width: 500px;
-            height: 500px;
+            right: 0;
+            width: 100%;
+            max-width: 500px;
+            height: 450px;
             z-index: 0;
             pointer-events: none;
-            opacity: 0.85;
+            opacity: 0.7;
         }
         .hero-tech-bg canvas {
             width: 100%;
@@ -90,7 +91,7 @@
         }
         .hero {
             max-width: 1000px;
-            margin: 5rem auto 3rem auto;
+            margin: 4rem auto 2rem auto;
             text-align: left;
             padding: 0 1.5rem;
             position: relative;
@@ -98,6 +99,8 @@
         }
         .hero-content {
             max-width: 600px;
+            position: relative;
+            z-index: 2;
         }
         .badge {
             display: inline-flex;
@@ -179,7 +182,7 @@
             100% { transform: scale(1); box-shadow: 0 10px 25px rgba(37, 211, 102, 0.4); }
         }
 
-        /* Sección de Animación de Flujos Omnicanal (Muy Vistosa) */
+        /* Sección de Animación de Flujos Omnicanal */
         .channels-flow-section {
             max-width: 950px;
             margin: 4rem auto;
@@ -282,6 +285,24 @@
         @keyframes dashMove {
             0% { offset-distance: 0%; }
             100% { offset-distance: 100%; }
+        }
+
+        /* Versión Móvil Especial para el Flujo Omnicanal (Oculta en PC, Activa en Celular) */
+        .flow-mobile-view {
+            display: none;
+            flex-direction: column;
+            align-items: center;
+            gap: 20px;
+        }
+        .flow-mobile-arrow {
+            font-size: 1.5rem;
+            color: var(--primary);
+            font-weight: bold;
+            animation: bounceArrow 1.5s infinite ease-in-out;
+        }
+        @keyframes bounceArrow {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(6px); }
         }
 
         /* Secciones de Video con Marco de Celular separados */
@@ -614,14 +635,17 @@
             border-top: 1px solid var(--border-color);
         }
 
+        /* MEDIA QUERIES PARA CELULARES (DISEÑO MÓVIL PRIORITARIO Y PERFECTO) */
         @media (max-width: 900px) {
-            .hero-tech-bg { display: none; }
             .hero { text-align: center; margin: 3rem auto 2rem auto; }
             .hero-content { max-width: 100%; }
-            .hero h1 { font-size: 2.4rem; }
-            .channels-flow-section { padding: 2.5rem 1rem; margin: 2rem 1rem; }
-            .flow-container { flex-direction: column; gap: 30px; }
-            .flow-lines { display: none; }
+            .hero h1 { font-size: 2.3rem; }
+            
+            /* Ajuste del flujo para móviles: Ocultamos el diagrama horizontal de PC y activamos el flujo vertical optimizado */
+            .channels-flow-section { padding: 2rem 1rem; margin: 2rem 1rem; }
+            .flow-container { display: none; } /* Oculta contenedor horizontal PC */
+            .flow-mobile-view { display: flex; } /* Muestra contenedor vertical móvil */
+            
             .feature-section { 
                 grid-template-columns: 1fr; 
                 gap: 2.5rem; 
@@ -651,7 +675,7 @@
     </header>
 
     <section class="hero">
-        <!-- Esfera Tecnológica Animada de Fondo (Recuperada) -->
+        <!-- Esfera Tecnológica Animada de Fondo (Visible en Celular y PC) -->
         <div class="hero-tech-bg">
             <canvas id="techSphere"></canvas>
         </div>
@@ -664,11 +688,12 @@
         </div>
     </section>
 
-    <!-- Animación de Flujos Omnicanal con Líneas Conectoras Vistosas -->
+    <!-- Animación de Flujos Omnicanal (Adaptado para PC y Celular) -->
     <div class="channels-flow-section">
         <h2>Unifica todos tus canales en un solo motor de ventas</h2>
         <p>Los mensajes fluyen en tiempo real hacia la Inteligencia Artificial que procesa y cierra la venta al instante.</p>
         
+        <!-- Versión Escritorio / PC -->
         <div class="flow-container">
             <div class="flow-lines">
                 <svg class="connector-svg" viewBox="0 0 800 250">
@@ -713,6 +738,32 @@
             <div class="channels-column">
                 <div class="channel-badge" style="border-color: var(--primary); color: var(--primary);">🎯 Venta Cerrada</div>
                 <div class="channel-badge" style="border-color: var(--primary); color: var(--primary);">📦 Pedido a Despacho</div>
+            </div>
+        </div>
+
+        <!-- Versión Móvil Exclusiva (Diseño Vertical Limpio y Vistoso) -->
+        <div class="flow-mobile-view">
+            <div style="font-size: 0.85rem; font-weight: 700; color: var(--text-muted); text-transform: uppercase; margin-bottom: 5px;">Canales de Entrada</div>
+            <div style="display: flex; flex-direction: column; gap: 10px; width: 100%; max-width: 280px;">
+                <div class="channel-badge" style="justify-content: center;">💬 WhatsApp Business</div>
+                <div class="channel-badge" style="justify-content: center;">📸 Instagram Direct</div>
+                <div class="channel-badge" style="justify-content: center;">💙 Facebook Messenger</div>
+            </div>
+
+            <div class="flow-mobile-arrow">↓</div>
+
+            <!-- Núcleo de IA Central en Móvil -->
+            <div class="ai-core-node" style="margin: 5px auto;">
+                SetupChat
+                <span>Motor de IA 24/7</span>
+            </div>
+
+            <div class="flow-mobile-arrow">↓</div>
+
+            <div style="font-size: 0.85rem; font-weight: 700; color: var(--text-muted); text-transform: uppercase; margin-bottom: 5px;">Resultados Automáticos</div>
+            <div style="display: flex; flex-direction: column; gap: 10px; width: 100%; max-width: 280px;">
+                <div class="channel-badge" style="border-color: var(--primary); color: var(--primary); justify-content: center;">🎯 Venta Cerrada</div>
+                <div class="channel-badge" style="border-color: var(--primary); color: var(--primary); justify-content: center;">📦 Pedido a Despacho</div>
             </div>
         </div>
     </div>
